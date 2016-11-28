@@ -1,8 +1,52 @@
 body {
-  padding: 50px;
+  padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.search{
+  	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+  }
+
+  .search-input{
+   	margin-left:5px;
+  	width:95%;
+    overflow: hidden;
+
+  }
+ /*search glyphicon*/
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+.searchbutton{
+	border:0;
+    background:transparent;
+}
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li + li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+.myimage{
+	height:310px;
+	width:100%;
 }

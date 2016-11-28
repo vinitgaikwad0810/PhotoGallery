@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title><%= title %></title>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="/angularjs/myapp.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Photo Stack</a>
+			</div>
+			<ul class="nav navbar-right navbar-nav">
+				<li><a href="#!/view1">My Pics</a></li>
+				<li><a href="#!/view1">Profile</a></li>
+				<li><a href="#!/view2">Account</a></li>
+				<li></li>
+			</ul>
+		</div>
+
+	</nav>
+	<div class="search">
+		<input type="text" class="search-input" name="search"
+			placeholder="Search pictures" />
+		<span> 
+			<button class="searchbutton" type="submit">
+				<span class="glyphicon glyphicon-search"></span>
+			</button>
+		</span>
+	</div>
+<br>
+	<div class="row">
+		<div class="col-md-4">
+			<table class="table table-inverse">
+				<tbody>
+					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==0">
+						<td><img src="{{n}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4">
+			<table class="table table-inverse">
+				<tbody>
+					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==1">
+						<td><img src="{{n}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4">
+			<table class="table table-inverse">
+				<tbody>
+					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==2">
+						<td><img src="{{n}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+</body>
+</html>
