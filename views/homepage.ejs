@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  ng-app="homeApp" >
 <head>
 <title><%= title %></title>
 <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -18,8 +18,12 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+
+ <script src="/js/core.js"></script>
+ 
 </head>
-<body ng-app="myApp" ng-controller="myCtrl">
+<body>
 
 
 	<nav class="navbar navbar-inverse">
@@ -30,7 +34,8 @@
 			<ul class="nav navbar-right navbar-nav">
 				<li><a href="#!/view1">My Pics</a></li>
 				<li><a href="#!/view1">Profile</a></li>
-				<li><a href="#!/view2">Account</a></li>
+				<li><a href="#!/view2">Upload</a></li>
+				<li><a href="#!/view2">Logout</a></li>
 				<li></li>
 			</ul>
 		</div>
@@ -46,45 +51,7 @@
 		</span>
 	</div>
 <br>
-	<div class="row">
-		<div class="col-md-4">
-			<table class="table table-inverse">
-				<tbody>
-					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==0">
-						<td><img src="{{n}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>
-
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-4">
-			<table class="table table-inverse">
-				<tbody>
-					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==1">
-						<td><img src="{{n}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>
-
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-4">
-			<table class="table table-inverse">
-				<tbody>
-					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==2">
-						<td><img src="{{n}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>
-
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
-
-	</div>
+	<div ng-view  ng-init="photos=<%=JSON.stringify(data)%>"></div>
 
 </body>
 </html>

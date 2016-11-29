@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  ,login=require('./routes/login')
   , http = require('http')
   , path = require('path');
 
@@ -27,8 +28,8 @@ app.use(express.static(path.join(__dirname, '/views/partialviews')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-
-app.get('/', routes.index);
+app.get('/',routes.index);
+app.get('/home', login.afterLogin);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){

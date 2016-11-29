@@ -25,3 +25,34 @@ photoApp.config(function($routeProvider) {
 	photoApp.controller('imageGridController', function($scope){
 		$scope.pageClass = 'page-imageGrid';
 	});
+	
+	
+	
+	
+	var homeApp = angular.module('homeApp', ['ngRoute']);
+
+	homeApp.config(function($routeProvider) {
+			$routeProvider
+
+				// route for the home page
+				.when('/', {
+					templateUrl : 'partialviews/homepage.html',
+					controller: 'homeController'
+				})
+
+				// route for the about page
+				.when('/image', {
+					templateUrl : 'partialviews/selectedImage.html',
+					controller: 'imageController'
+				});
+
+		});
+
+		homeApp.controller('homeController', function($scope){
+			
+		});
+
+		homeApp.controller('imageController', function($scope){
+			
+		});
+
