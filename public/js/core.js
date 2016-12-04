@@ -14,6 +14,12 @@ photoApp.config(function($routeProvider) {
 			.when('/images', {
 				templateUrl : 'partialviews/images.html',
 				controller: 'imageGridController'
+			})
+
+			.when('/login',{
+				templateUrl : 'login/login.view.html',
+				controller : 'loginController'
+
 			});
 
 	});
@@ -26,7 +32,9 @@ photoApp.config(function($routeProvider) {
 		$scope.pageClass = 'page-imageGrid';
 	});
 	
-	
+	photoApp.controller('loginController',function($scope){
+		//$scope.pageClass = 'page-imageGrid';
+	}); 	
 	
 	
 	var homeApp = angular.module('homeApp', ['ngRoute']);
