@@ -6,9 +6,16 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
-  ,login=require('./routes/login')
+  , login=require('./routes/login')
+  , registration=require('./routes/registration')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , session = require('express-session')
+  , redisStore = require('connect-redis')(session)
+  , redis   = require("redis");
+
+  var client  = redis.createClient();
+  
 
 var app = express();
 
@@ -16,6 +23,7 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
@@ -24,6 +32,14 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '/views/partialviews')));
 
+app.use(session({
+    secret: 'ssshhhhh',
+    // create new redis store.
+    store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl :  260}),
+    saveUninitialized: false,
+    resave: false
+}));
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -31,6 +47,7 @@ if ('development' == app.get('env')) {
 app.get('/',routes.index);
 app.get('/home', login.afterLogin);
 app.get('/users', user.list);
+app.post('/api/register',registration.register);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

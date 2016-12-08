@@ -56,8 +56,29 @@ photoApp.config(function($stateProvider, $urlRouterProvider){
 			},
 
 			'content': {
-				templateUrl: '/components/login/login.view.html',	
+				templateUrl: '/components/signin/login.view.html',	
 				controller: 'Login.IndexController'
+
+			},
+			'footer': {
+				templateUrl: '/shared/footer/footer.html'
+			}
+		}
+
+
+})
+	.state('signup',{
+		url: '/signup',
+		views: {
+
+			'header': {
+				templateUrl: '/shared/header/header.html'
+
+			},
+
+			'content': {
+				templateUrl: '/components/signup/signup.html',	
+				controller: 'signupController'
 
 			},
 			'footer': {
