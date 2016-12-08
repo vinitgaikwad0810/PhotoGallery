@@ -5,8 +5,8 @@
         .module('photoApp')
         .controller('Login.IndexController', Controller);
  
-    function Controller($location, AuthenticationService) {
-        var vm = this;
+    function Controller($scope, $location, AuthenticationService) {
+        var vm = $scope;
  
         vm.login = login;
  
@@ -19,11 +19,15 @@
  
         function login() {
             vm.loading = true;
+         //   console.log("Donita"+vm.username);
             AuthenticationService.Login(vm.username, vm.password, function (result) {
                 if (result === true) {
-                    $location.path('/');
+                	//console.log("Donita"+vm.username);
+                  //  $location.path('/');
+                	$state.transitionTo('landingpage');
                 } else {
                     vm.error = 'Username or password is incorrect';
+                    console.log(vm.error);
                     vm.loading = false;
                 }
             });

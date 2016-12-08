@@ -9,13 +9,18 @@ angular.module('photoApp').factory('AuthenticationService',
         service.Login = function (username, password, callback) {
 
             /* Dummy authentication for testing, uses $timeout to simulate api call
+             * 
+             * 
              ----------------------------------------------*/
+        	
+        	console.log("Don" + username + password);
             $timeout(function () {
                 var response = { success: username === 'test' && password === 'test' };
+                console.log(response.success);
                 if (!response.success) {
                     response.message = 'Username or password is incorrect';
                 }
-                callback(response);
+                callback(response.success);
             }, 1000);
 
 
