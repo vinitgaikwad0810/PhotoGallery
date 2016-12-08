@@ -14,7 +14,7 @@
  
         function initController() {
             // reset login status
-            AuthenticationService.Logout();
+            // AuthenticationService.Logout();
         };
  
         function login() {
