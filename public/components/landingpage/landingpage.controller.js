@@ -1,11 +1,11 @@
 (function() {
 	'use strict';
 
-	angular.module('photoApp').controller('landingPageController', Controller);
+	angular.module('photoApp').controller('landingPageController', Controller,['$cookieStore', '$rootScope']);
 
-	function Controller($location, $stateParams, $scope, GetPhotosService) {
+	function Controller($location, $stateParams, $scope,$state,$cookieStore, $rootScope, GetPhotosService) {
 		var vm = $scope;
-
+		vm.goToProfilePage=goToProfilePage;
 		initController();
 
 		function initController() {
@@ -34,5 +34,10 @@
 			}, 3000);
 		}
 		;
+		function goToProfilePage(){
+			var id=$cookieStore.get('globals').currentUser.username;
+			$state.transitionTo('profilepage',{id:id});
+		
+	};
 	}
 })();

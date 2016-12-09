@@ -11,12 +11,14 @@ a {
   	border-right:0; 
 	box-shadow:0 0 0; 
 	border-color:#ccc;
+
   }
 
   .search-input{
    	margin-left:5px;
   	width:95%;
     overflow: hidden;
+  
 
   }
  /*search glyphicon*/

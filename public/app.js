@@ -97,7 +97,8 @@ photoApp
 								views : {
 
 									'header' : {
-										templateUrl : '/components/landingpage/header.html'
+										templateUrl : '/components/landingpage/header.html',
+										controller : 'landingPageController'
 
 									},
 
@@ -111,7 +112,30 @@ photoApp
 									}
 								}
 
-							});
+							}).state(
+									'profilepage',
+									{
+										url : '/profilepage/:id',
+										views : {
+
+											'header' : {
+												templateUrl : '/components/landingpage/header.html',
+													controller : 'landingPageController'
+
+											},
+
+											'content' : {
+												templateUrl : '/components/profilepage/profilepage.content.html',
+												controller : 'profilePageController'
+
+											},
+											'footer' : {
+												templateUrl : '/shared/footer/footer.html'
+											}
+										}
+
+									});
+							
 
 		});
 

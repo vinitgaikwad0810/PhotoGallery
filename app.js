@@ -48,6 +48,7 @@ if ('development' == app.get('env')) {
 }
 app.get('/',routes.index);
 app.get('/api/getPhotos/:id', photos.getPhotos);
+app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.get('/users', user.list);
 app.post('/api/register',registration.register);
 app.post('/api/authentication',authentication.authenticate);
