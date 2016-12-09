@@ -7,7 +7,7 @@ exports.register = function (req, res){
 	mongo.connect(mongoURL,function() {
 
 	mongo.collection('userCollection').insertOne(req.body,function(err, result) {
-    assert.equal(err, null);
+    
     console.log("Inserted a document into the userCollection collection.");
    
   	});
