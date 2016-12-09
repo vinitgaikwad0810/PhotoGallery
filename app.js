@@ -6,7 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
-  , login=require('./routes/login')
+  , photos=require('./routes/photos')
   , registration=require('./routes/registration')
   , http = require('http')
   , path = require('path')
@@ -45,7 +45,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 app.get('/',routes.index);
-app.get('/home', login.afterLogin);
+app.get('/api/getPhotos/:id', photos.getPhotos);
 app.get('/users', user.list);
 app.post('/api/register',registration.register);
 

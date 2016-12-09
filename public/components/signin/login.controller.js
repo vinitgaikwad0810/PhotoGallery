@@ -25,7 +25,7 @@
                 if (result === true) {
                 	//console.log("Donita"+vm.username);
                   //  $location.path('/');
-                	$state.transitionTo('landingpage',{id:"1"});
+                	$state.transitionTo('landingpage',{id:"test"});
                 } else {
                     vm.error = 'Username or password is incorrect';
                     console.log(vm.error);

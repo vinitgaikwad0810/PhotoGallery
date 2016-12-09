@@ -97,7 +97,7 @@ photoApp
 								views : {
 
 									'header' : {
-										templateUrl : '/shared/header/header.html'
+										templateUrl : '/components/landingpage/header.html'
 
 									},
 

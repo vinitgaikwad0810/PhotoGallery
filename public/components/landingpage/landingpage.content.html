@@ -1,12 +1,13 @@
-
-<div class="row">
+<br><br>
+<div class="row" >
 		<div class="col-md-4">
 			<table class="table table-inverse">
 				<tbody>
 					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==0" >
-						<td><img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>
-
+						<td><div><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="desc">{{n.description}}</div></div></td>
+							
+							
 					</tr>
 
 				</tbody>
@@ -16,9 +17,11 @@
 			<table class="table table-inverse">
 				<tbody>
 					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==1">
-						<td><img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>
-
+						<td><div><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">	<div class="desc">{{n.description}}</div></div>
+							</td>
+						
+							
 					</tr>
 
 				</tbody>
@@ -28,9 +31,11 @@
 			<table class="table table-inverse">
 				<tbody>
 					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==2">
-						<td><img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>
-
+						<td><div><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">
+							<div class="desc">{{n.description}}</div></div>	</td>
+							
+									
 					</tr>
 
 				</tbody>
