@@ -93,7 +93,7 @@ photoApp
 					.state(
 							'landingpage',
 							{
-								url : '/landingpage',
+								url : '/landingpage/:id',
 								views : {
 
 									'header' : {
