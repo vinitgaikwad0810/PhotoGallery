@@ -18,17 +18,19 @@
         };
  
         function login() {
-        	console.log($state);
+            console.log($state);
             vm.loading = true;
          //   console.log("Donita"+vm.username);
-            AuthenticationService.Login(vm.username, vm.password, function (result) {
-                if (result === true) {
-                	//console.log("Donita"+vm.username);
+            AuthenticationService.Login(vm.username, vm.password, function (success) {
+                if (success === true) {
+                    //console.log("Donita"+vm.username);
                   //  $location.path('/');
-                	$state.transitionTo('landingpage',{id:"test"});
+                    AuthenticationService.SetCredentials(vm.username,vm.password);
+
+                    $state.transitionTo('landingpage',{id:vm.username});
                 } else {
-                    vm.error = 'Username or password is incorrect';
-                    console.log(vm.error);
+                    vm.serverMessage = 'Username or password is incorrect';
+                    console.log(vm.serverMessage);
                     vm.loading = false;
                 }
             });

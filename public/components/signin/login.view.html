@@ -8,8 +8,12 @@
    
     <!-- FORM -->
     <!-- pass in the variable if our form is valid or invalid -->
+
     <form name="userForm" ng-submit = "login()" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
 
+    <div class = "alert alert-danger" ng-show="serverMessage">{{serverMessage}}</div>
+
+    <br>
         <!-- NAME -->
     <!--     <div class="form-group">
             <label>Name</label>

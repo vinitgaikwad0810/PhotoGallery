@@ -1,6 +1,6 @@
 'use strict';
 
-var photoApp = angular.module('photoApp', [ 'ui.router', 'ngCookies' ]);
+var photoApp = angular.module('photoApp', [ 'ui.router', 'ngCookies', 'base64' ]);
 
 photoApp
 		.config(function($stateProvider, $urlRouterProvider) {

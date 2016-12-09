@@ -8,11 +8,13 @@ var express = require('express')
   , user = require('./routes/user')
   , photos=require('./routes/photos')
   , registration=require('./routes/registration')
+  , authentication = require('./routes/authentication')
   , http = require('http')
   , path = require('path')
   , session = require('express-session')
   , redisStore = require('connect-redis')(session)
   , redis   = require("redis");
+
 
   var client  = redis.createClient();
   
@@ -48,6 +50,8 @@ app.get('/',routes.index);
 app.get('/api/getPhotos/:id', photos.getPhotos);
 app.get('/users', user.list);
 app.post('/api/register',registration.register);
+app.post('/api/authentication',authentication.authenticate);
+//app.
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
