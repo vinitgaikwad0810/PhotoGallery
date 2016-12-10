@@ -14,6 +14,14 @@ angular.module('photoApp').factory('GetProfileDetailsService',
             });
 
         };
+        service.editProfileDetails = function (name, city, username, email, password, callback) {
+
+            $http.post('/api/editProfileDetails',{ name: name , city:city, username: username, email:email, password: password }).success(function(response){
+               	console.log(response);
+               	callback(response);
+            });
+
+        };
    
        return service;
  }]);

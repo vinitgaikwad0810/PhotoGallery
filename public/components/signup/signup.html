@@ -1,6 +1,6 @@
 <!-- apply angular app and controller to our body -->
 <body ng-app="photoApp" ng-controller="singupController">
-<div class="container">
+<div class="container" >
 <div class="col-sm-8 col-sm-offset-2">
     
     <!-- PAGE HEADER -->
@@ -25,6 +25,12 @@
             <p ng-show="userForm.username.$error.maxlength" class="help-block">Username is too long.</p>
 
         </div>
+         <!-- CITY -->
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" name="city" class="form-control" ng-model="city" required>
+            <p ng-show="userForm.name.$invalid " class="help-block">You city is required.</p>
+        </div>
         
         <!-- EMAIL -->
         <div class="form-group">
@@ -44,4 +50,5 @@
 
 </div><!-- col-sm-8 -->
 </div><!-- /container -->
+
 </body>

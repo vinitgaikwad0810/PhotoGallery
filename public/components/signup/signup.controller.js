@@ -28,7 +28,7 @@
             //     }
             // });
 
-            RegistrationService.register(vm.name, vm.username, vm.email, vm.password, function(result){
+            RegistrationService.register(vm.name,vm.city, vm.username, vm.email, vm.password, function(result){
 
 
              console.log("Vinit!!!!");

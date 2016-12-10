@@ -5,7 +5,7 @@
 
 	function Controller($location, $stateParams, $scope,$state, GetProfileDetailsService) {
 		var vm = $scope;
-		vm.getProfileDetails=getProfileDetails;
+		vm.editProfileDetails=editProfileDetails;
 	
 		initController();
 		function initController() {
@@ -15,7 +15,7 @@
 		;
 		function getProfileDetails(id) {
 			console.log("State Params" + id);
-			setTimeout(function() {
+			
 				GetProfileDetailsService.getProfileDetails(id, function(result) {
 					if (result) {
 						console.log(result.data);
@@ -27,7 +27,23 @@
 
 					}
 				});
-			}, 3000);
+			
+		};
+		function editProfileDetails() {
+			
+			console.log("Edit Profile"+vm.user.name+" "+vm.user.city+" "+vm.user.username);
+				GetProfileDetailsService.editProfileDetails(vm.user.name, vm.user.city, vm.user.username, vm.user.email, vm.user.password, function(result) {
+					if (result.status_code==200) {
+						console.log(result);
+						
+						getProfileDetails(vm.user.username);
+						
+					
+					} else {
+						console.log("Cannot edit");
+					}
+				});
+			
 		};
 
 	}

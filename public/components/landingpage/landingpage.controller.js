@@ -21,7 +21,7 @@
 
 		function getPhotos(id) {
 			console.log("State Params" + id);
-			setTimeout(function() {
+		
 				GetPhotosService.getPhotos(id, function(result) {
 					if (result) {
 						console.log(result.data);
@@ -31,9 +31,9 @@
 
 					}
 				});
-			}, 3000);
-		}
-		;
+			
+		};
+		
 		function goToProfilePage(){
 			var id=$cookieStore.get('globals').currentUser.username;
 			$state.transitionTo('profilepage',{id:id});

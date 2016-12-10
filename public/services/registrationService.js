@@ -6,7 +6,7 @@ angular.module('photoApp').factory('RegistrationService',
 	function ( $http, $cookieStore, $rootScope, $timeout) {
         var service = {};
 
-        service.register = function (name, username, email, password, callback) {
+        service.register = function (name, city, username, email, password, callback) {
 
             /* Dummy authentication for testing, uses $timeout to simulate api call
              ----------------------------------------------*/
@@ -18,7 +18,7 @@ angular.module('photoApp').factory('RegistrationService',
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            $http.post('/api/register', { name: name , username: username, email:email, password: password })
+            $http.post('/api/register', { name: name , city:city, username: username, email:email, password: password })
                 .success(function (response) {
                     callback(response);
                });

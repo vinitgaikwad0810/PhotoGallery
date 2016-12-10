@@ -33,3 +33,31 @@ exports.getProfileDetails =function(req,res){
 		});
 	});
 };
+
+exports.editProfileDetails = function (req, res){
+
+	console.log (req.body);
+	mongo.connect(mongoURL,function() {
+
+	mongo.collection('userCollection').update({username:req.body.username},req.body,
+			   { upsert: true },function(err, result) {
+				   if(err){
+						json_responses.status_code=500;
+						console.log(err);
+						res.send(json_responses);
+				   }
+				   else{
+					   json_responses.status_code=200;
+					   console.log("Inserted a document into the userCollection collection.");
+						res.send( json_responses);
+				   }
+    
+  
+   
+  	});
+
+	});
+	
+
+
+};
