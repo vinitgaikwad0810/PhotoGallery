@@ -14,6 +14,17 @@ angular.module('photoApp').factory('GetPhotosService',
             });
 
         };
+        
+
+        service.getMyBuys = function (id, callback) {
+
+            $http.get('/api/getMyBuys/'+id).success(function(response){
+               	console.log(response);
+               	callback(response);
+            });
+
+        };
+        
    
        return service;
  }]);

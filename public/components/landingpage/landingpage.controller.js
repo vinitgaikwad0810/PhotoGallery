@@ -5,9 +5,9 @@
 
 	function Controller($location, $stateParams, $scope,$state,$cookieStore, $rootScope, GetPhotosService, $http, PostPhotoService) {
 		var vm = $scope;
-		vm.goToProfilePage=goToProfilePage;
-		vm.getDetails=getDetails;
-		//console.log(data);
+    vm.getDetails=getDetails;
+    vm.goToProfilePage=goToProfilePage;
+		vm.goToMyPicsPage=goToMyPicsPage;
 		initController();
 
 		function initController() {
@@ -40,12 +40,21 @@
 			$state.transitionTo('profilepage',{id:id});
 
 	};
+	
+	function goToMyPicsPage(){
+		var id=$cookieStore.get('globals').currentUser.username;
+		$state.transitionTo('mypicspage',{id:id});
+	
+};
+
+
 
 		function getDetails(id) {
 			//console.log("Inside getDetails" + id);
 	    $state.transitionTo('image_details',{id:id});
 
 		};
+
 
 		$scope.fileUpload = function() {
       $("#Upload").click();
@@ -78,7 +87,7 @@
 							jsondata["username"] = $cookieStore.get('globals').currentUser.username;
 							jsondata["ratings"] = 0;
 							xhr.open('PUT', response["data"]);
-							xhr.onreadystatechange = () => {
+							xhr.onreadystatechange = function() {
 								if(xhr.readyState === 4){
 									if(xhr.status === 200){
 										alert('successful');
@@ -141,5 +150,10 @@
 			$("#previewModal").addClass('modal-open');
 			//	$(".modal-backdrop").removeClass();*/
 		});
-		};
+	
+	};
+	
+	
+	
+
 })();

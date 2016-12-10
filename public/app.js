@@ -84,6 +84,7 @@ photoApp.config(function($stateProvider, $urlRouterProvider) {
 										templateUrl : '/shared/footer/footer.html'
 									}
 								}
+
 							}).state(
 									'profilepage',
 									{
@@ -92,9 +93,13 @@ photoApp.config(function($stateProvider, $urlRouterProvider) {
 
 											'header' : {
 												templateUrl : '/components/landingpage/header.html',
+
 													controller : 'landingPageController'
 												},
-												'content' : {
+												
+													'content' : {
+
+
 														templateUrl : '/components/profilepage/profilepage.content.html',
 														controller : 'profilePageController'
 
@@ -103,7 +108,9 @@ photoApp.config(function($stateProvider, $urlRouterProvider) {
 														templateUrl : '/shared/footer/footer.html'
 													}
 											}
+
 										}).state(
+
 									'image_details',
 									{
 										url : '/details/:id',
@@ -111,20 +118,52 @@ photoApp.config(function($stateProvider, $urlRouterProvider) {
 
 											'header' : {
 												templateUrl : '/components/landingpage/header.html'
+
+
+
 											},
 											'content' : {
+
 												templateUrl : '/components/image_details/details.html',
 												controller : 'detailsController'
 
 											},
 
+
 											'footer' : {
 												templateUrl : '/shared/footer/footer.html'
 											}
 										}
-									});
 
-		});
+									})
+
+
+									.state(
+											'mypicspage',
+											{
+												url : '/mypicspage/:id',
+												views : {
+
+													'header' : {
+														templateUrl : '/components/landingpage/header.html',
+															controller : 'landingPageController'
+
+													},
+
+													'content' : {
+														templateUrl : '/components/mypics/mypicspage.content.html',
+														controller : 'myPicsPageController'
+
+													},
+													'footer' : {
+														templateUrl : '/shared/footer/footer.html'
+													}
+												}
+
+											});				
+
+
+})
 
 photoApp.controller('videoController', function($scope) {
 	$scope.pageClass = 'page-video';

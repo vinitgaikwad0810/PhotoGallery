@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>My Pics</title>
+</head>
+<body>
+<script>
+$(document).ready(function(){
+	$('a').click(function (e) {
+	      e.preventDefault();
+	  });
+});
+</script>
+<div class="container">
+  
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#mypics" >My Pics</a></li>
+    <li><a data-toggle="tab" href="#mybuys" >My Buys</a></li>
+
+  </ul>
+
+  <div class="tab-content">
+    <div id="mypics" class="tab-pane fade in active">
+      <h3>My Pics</h3>
+      <div class="row" style="margin-top:50px;">
+		<div class="col-md-4">
+			<table class="table table-inverse">
+				<tbody>
+					<tr ng-repeat="n in mypics track by $index" ng-if="$index%3==0" >
+						<td><div><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="desc">{{n.description}}</div></div></td>
+							
+							
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4">
+			<table class="table table-inverse">
+				<tbody>
+					<tr ng-repeat="n in mypics track by $index" ng-if="$index%3==1">
+						<td><div><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">	<div class="desc">{{n.description}}</div></div>
+							</td>
+						
+							
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4">
+			<table class="table table-inverse">
+				<tbody>
+					<tr ng-repeat="n in mypics track by $index" ng-if="$index%3==2">
+						<td><div><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">
+							<div class="desc">{{n.description}}</div></div>	</td>
+							
+									
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+      
+      
+      
+    </div>
+    <div id="mybuys" class="tab-pane fade">
+      <h3>My Buys</h3>
+      <div class="row" style="margin-top:50px;">
+		<div class="col-md-4">
+			<table class="table table-inverse">
+				<tbody>
+					<tr ng-repeat="n in mybuys track by $index" ng-if="$index%3==0" >
+						<td><div><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="desc">{{n.description}}</div></div></td>
+							
+							
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4">
+			<table class="table table-inverse">
+				<tbody>
+					<tr ng-repeat="n in mybuys track by $index" ng-if="$index%3==1">
+						<td><div><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">	<div class="desc">{{n.description}}</div></div>
+							</td>
+						
+							
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4">
+			<table class="table table-inverse">
+				<tbody>
+					<tr ng-repeat="n in mybuys track by $index" ng-if="$index%3==2">
+						<td><div><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">
+							<div class="desc">{{n.description}}</div></div>	</td>
+							
+									
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+    </div>
+    
+  </div>
+</div>
+
+</body>
+</html>
