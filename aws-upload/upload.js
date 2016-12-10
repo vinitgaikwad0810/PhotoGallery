@@ -18,6 +18,6 @@ exports.uploadImage = function(request, response) {
       response.send(responseLink);
     }
   });
-
+  //response.send(200);
 
 }

@@ -101,3 +101,8 @@ a {
 .tableData {
   display: inline;
 }
+
+.img-thumbnail.img-thumbnail-custom{
+  width: 150px;
+  height: 150px;
+}
