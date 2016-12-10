@@ -14,27 +14,20 @@ html, body {
     left: 0;
 }
 
-.content {
+.page-landing {
 
-   float: left;
+    float: left;
     clear:left;
- 	position:absolute;
+ 	  position:absolute;
     top:71px;
     bottom:200px;
     height: 100%;
     width: 100%;
-<<<<<<< Updated upstream
-    z-index:0;
-=======
     z-index:-1;
-
->>>>>>> Stashed changes
     overflow: auto;
-
 }
 
 .footer {
-
   background: #3e474f;
   position: fixed;
   clear: left;

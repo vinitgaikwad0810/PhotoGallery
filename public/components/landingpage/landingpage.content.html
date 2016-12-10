@@ -1,8 +1,7 @@
-	
-	<br><br>
+<div class="{{PageClass}}">
 	<div class="search" style="padding-top:20px;">
 		<input autofocus type="text" class="search-input"  placeholder="Search pictures" />
-		<span> 
+		<span>
 			<button class="searchbutton" type="submit">
 				<span class="glyphicon glyphicon-search"></span>
 			</button>
@@ -30,7 +29,7 @@
 					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==1">
 						<td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false"><img src="{{n.url}}"
 							class="img-fluid, img-thumbnail, myimage" ng-hide="zoomImage" alt="Responsive image">	<div class="desc" ng-show="zoomImage"><img src="{{n.url}}"
-								class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="img-desc">{{n.description}}</div></div>
+								class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="img-desc">{{n.description}}</div></div></div>
 							</td>
 
 
@@ -45,7 +44,7 @@
 					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==2">
 						<td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false"><img src="{{n.url}}"
 							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">	<div class="desc" ng-show="zoomImage"><img src="{{n.url}}"
-								class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="img-desc">{{n.description}}</div></div></td>
+								class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="img-desc">{{n.description}}</div></div></div></td>
 
 
 					</tr>
@@ -54,4 +53,46 @@
 			</table>
 		</div>
 
+	</div>
+
+
+		<button type="button" id="uploadButton" class="btn btn-default btn-circle btn-lg" ng-click="fileUpload()">
+						<i class="glyphicon glyphicon-plus"></i>
+					</button>
+					<!--<input type="file" id="upload"> -->
+					<input accept="image/*" type="file" name="file" id="Upload" multiple=""/>
+
+
+	  <div class="modal fade" id="previewModal" role="dialog">
+	    <div class="modal-dialog">
+
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal" ng-click=destroy()>×</button>
+	          <h4 class="modal-title">Preview</h4>
+	        </div>
+	        <div class="modal-body">
+	          <p>Click Done to preview.</p>
+						<table class="table table-responsive table-sm">
+							<tbody>
+								<tr>
+									<td ng-repeat="n in files track by $index" class="tableData" >
+										<div class="col-sm-4">
+											<img id="{{'previewImage-'+ $index}}" class="img-thumbnail" alt="Responsive image">
+											<input type="text" class="form-control" id="{{'tokenField-' + $index}}" placeholder="tags" />
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+				  </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="destroy()">Close</button>
+						<button type="button" class="btn btn-primary" ng-click="uploadToS3()">Upload</button>
+	        </div>
+	      </div>
+
+	    </div>
+		</div>
 	</div>

@@ -18,7 +18,7 @@ a {
    	margin-left:5px;
   	width:80%;
     overflow: hidden;
-  
+
 
   }
  /*search glyphicon*/
@@ -75,4 +75,29 @@ a {
 }
 #profileheader{
 	margin-bottom:0px;
+}
+
+
+.btn-circle.btn-lg {
+  background-color: orange;
+  border-radius: 30px;
+  position: fixed;
+  right: 0px;
+  bottom: 30px;
+}
+
+#Upload {
+  display: none;
+}
+
+#uploadButton:hover {
+  background-color: red;
+}
+
+#uploadButton:focus {
+  outline: none;
+}
+
+.tableData {
+  display: inline;
 }
