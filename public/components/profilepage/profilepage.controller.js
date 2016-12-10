@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 
-	angular.module('photoApp').controller('profilePageController', Controller);
+	angular.module('photoApp').controller('profilePageController', Controller,['$cookieStore', '$rootScope']);
 
-	function Controller($location, $stateParams, $scope,$state, GetProfileDetailsService) {
+	function Controller($location, $stateParams, $scope,$state,$cookieStore,$rootScope, GetProfileDetailsService) {
 		var vm = $scope;
 		vm.editProfileDetails=editProfileDetails;
 	

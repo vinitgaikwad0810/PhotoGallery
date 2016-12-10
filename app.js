@@ -49,9 +49,22 @@ if ('development' == app.get('env')) {
 }
 app.get('/',routes.index);
 app.get('/api/getPhotos/:id', photos.getPhotos);
+
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
 app.get('/api/getImageDetails/:id',photos.getImageDetails);
+
+
+app.get('/api/getProfileDetails/:id', user.getProfileDetails);
+app.post('/api/editProfileDetails', user.editProfileDetails);
+
+app.get('/api/getImageDetails/:id',photos.getImageDetails);
+
+app.get('/api/getMyBuys/:id', photos.getMyBuys);
+app.get('/api/getProfileDetails/:id', user.getProfileDetails);
+app.post('/api/editProfileDetails', user.editProfileDetails);
+app.post('/api/uploadPics', photos.uploadPhotos);
+
 app.get('/users', user.list);
 app.get('/aws', aws.uploadImage);
 app.post('/api/register',registration.register);

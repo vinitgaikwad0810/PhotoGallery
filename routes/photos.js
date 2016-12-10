@@ -46,6 +46,30 @@ exports.getImageDetails= function(req, res){
 				console.log(photos);
 				res.send( json_responses);
 
+			}else{
+				json_responses.status_code=500;
+				console.log(err);
+				res.send(json_responses);
+				}
+			});
+	});
+};
+exports.getMyBuys = function(req, res){
+	
+	var id=req.params.id;
+	console.log("id:"+id);
+	
+	mongo.connect(mongoURL,function(){
+		var coll=mongo.collection('photo');
+		coll.find({
+		    "bought_by": id
+		}).toArray(function(err, photos){
+			if (photos) {
+				json_responses.status_code=200;
+				json_responses.data=photos;
+				console.log(photos);
+				res.send( json_responses);
+
 			} else {
 				json_responses.status_code=500;
 				console.log(err);
@@ -55,3 +79,28 @@ exports.getImageDetails= function(req, res){
 	});
 
 };
+
+
+exports.uploadPhotos = function(req, res){
+	
+	var docs=req.body;
+	console.log("docs:"+docs);
+	mongo.connect(mongoURL,function() {
+
+		mongo.collection('photos').insertOne(req.body,function(err, result) {
+	    
+				if(err){
+					json_responses.status_code=500;
+					console.log(err);
+					res.send(json_responses);
+				}else{
+					json_responses.status_code=200;
+					res.send( json_responses);
+				}  
+	  	});
+
+		});	
+
+};
+
+

@@ -4,9 +4,12 @@
 	angular.module('photoApp').controller('landingPageController', Controller,['$cookieStore', '$rootScope']);
 
 	function Controller($location, $stateParams, $scope,$state,$cookieStore, $rootScope, GetPhotosService, $http) {
+
 		var vm = $scope;
-		vm.goToProfilePage=goToProfilePage;
-		vm.getDetails=getDetails;
+  vm.getDetails=getDetails;
+  vm.goToProfilePage=goToProfilePage;
+		vm.goToMyPicsPage=goToMyPicsPage;
+
 		initController();
 
 		function initController() {
@@ -39,12 +42,21 @@
 			$state.transitionTo('profilepage',{id:id});
 
 	};
+	
+	function goToMyPicsPage(){
+		var id=$cookieStore.get('globals').currentUser.username;
+		$state.transitionTo('mypicspage',{id:id});
+	
+};
+
+
 
 		function getDetails(id) {
 			console.log("Inside getDetails" + id);
 	    $state.transitionTo('image_details',{id:id});
 
 		};
+
 
 		$scope.fileUpload = function() {
       $("#Upload").click();
@@ -67,7 +79,7 @@
 							console.log("response"+response["data"]);
 							const xhr = new XMLHttpRequest();
 							xhr.open('PUT', response["data"]);
-							xhr.onreadystatechange = () => {
+							xhr.onreadystatechange = function() {
 								if(xhr.readyState === 4){
 									if(xhr.status === 200){
 										alert('successful');
@@ -125,5 +137,10 @@
 			$("#previewModal").addClass('modal-open');
 			//	$(".modal-backdrop").removeClass();*/
 		});
-		};
+	
+	};
+	
+	
+	
+
 })();
