@@ -3,10 +3,11 @@
 
 	angular.module('photoApp').controller('landingPageController', Controller,['$cookieStore', '$rootScope']);
 
-	function Controller($location, $stateParams, $scope,$state,$cookieStore, $rootScope, GetPhotosService, $http) {
+	function Controller($location, $stateParams, $scope,$state,$cookieStore, $rootScope, GetPhotosService, $http, PostPhotoService) {
 		var vm = $scope;
 		vm.goToProfilePage=goToProfilePage;
 		vm.getDetails=getDetails;
+		//console.log(data);
 		initController();
 
 		function initController() {
@@ -21,11 +22,11 @@
 		;
 
 		function getPhotos(id) {
-			console.log("State Params" + id);
+			//console.log("State Params" + id);
 
 				GetPhotosService.getPhotos(id, function(result) {
 					if (result) {
-						console.log(result.data);
+						//console.log(result.data);
 						// $location.path('/');
 						vm.photos = result.data;
 					} else {
@@ -41,7 +42,7 @@
 	};
 
 		function getDetails(id) {
-			console.log("Inside getDetails" + id);
+			//console.log("Inside getDetails" + id);
 	    $state.transitionTo('image_details',{id:id});
 
 		};
@@ -54,9 +55,14 @@
 			var files = $("#Upload")[0].files;
 			var promises = [];
 			if(files.length > 0) {
+				$scope.max = files.length;
+				$scope.dynamic = 0;
 				angular.forEach(files, function(value,key) {
 						getUrl(value);
 				});
+				//console.log("$data");
+
+				//console.log($scope.data);
     }
 		}
 
@@ -64,19 +70,27 @@
 			var s3 = new AWS.S3({ params: {Bucket: ''} });
 			$http.get('/aws?filename=' + file.name +'&filetype=' + file.type)
 					  .then(function(response) {
-							console.log("response"+response["data"]);
 							const xhr = new XMLHttpRequest();
+							var tags = [$("tokenField-0").tokenfield('getTokensList')];
+							var jsondata = new Object();
+							jsondata["url"] = response["data"];
+							jsondata["tags"] = tags;
+							jsondata["username"] = $cookieStore.get('globals').currentUser.username;
+							jsondata["ratings"] = 0;
 							xhr.open('PUT', response["data"]);
 							xhr.onreadystatechange = () => {
 								if(xhr.readyState === 4){
 									if(xhr.status === 200){
 										alert('successful');
+										$scope.dynamic = $scope.dynamic + 1;
+										//$scope.data.push(jsondata);
+										PostPhotoService.postPhoto(jsondata);
 									} else{
 										alert('Could not upload file.');
+										//$scope.data.push(jsondata); // need to remove
 									}
 								}
 							};
-							console.log("file"+file);
 							xhr.send(file);
 						}, function(response) {
 							alert("hello");
@@ -110,6 +124,8 @@
 			$("#previewModal").modal({backdrop: false});
 
 			$(".modal").modal('show');
+			//var totalwidth = 190 * $('.tableData').length;
+			//$(".modal-body").css('width', totalwidth);
 
 			var anyWindow = window.URL || window.webkitURL;
 			for(var i = 0; i < file.length; i++){

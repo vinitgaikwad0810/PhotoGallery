@@ -73,13 +73,13 @@
 	          <h4 class="modal-title">Preview</h4>
 	        </div>
 	        <div class="modal-body">
-	          <p>Click Done to preview.</p>
+	          <p>Click upload to upload images to your gallery.</p>
 						<table class="table table-responsive table-sm">
 							<tbody>
 								<tr>
 									<td ng-repeat="n in files track by $index" class="tableData" >
 										<div class="col-sm-4">
-											<img id="{{'previewImage-'+ $index}}" class="img-thumbnail" alt="Responsive image">
+											<img id="{{'previewImage-'+ $index}}" class="img-thumbnail img-thumbnail-custom" alt="Responsive image">
 											<input type="text" class="form-control" id="{{'tokenField-' + $index}}" placeholder="tags" />
 										</div>
 									</td>
@@ -95,4 +95,5 @@
 
 	    </div>
 		</div>
+		<uib-progressbar max="max" value="dynamic"><span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span></uib-progressbar>
 	</div>
