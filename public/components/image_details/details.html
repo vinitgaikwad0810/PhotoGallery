@@ -1,0 +1,59 @@
+
+    <!-- <br><br><br> <p>Sample Test</p>{{photoDetails.description}} -->
+ <br>
+
+     <div class="row total_div">
+       <div class=" col-md-5 i_detail">
+      <div class= "i_title" ><h1>{{photoDetails.photo_name}}</h1>
+        <div >  <img src="{{photoDetails.url}}" alt="sorry no image" class="samp-img" >
+        </div>
+      </div>
+     </div>
+
+      <div class="col-md-6 detail_desc">
+        <!-- <div class="content-data">
+          <ul class="tabs-group">
+             <li class="ftl-tab col-8 tab-flat tab-active">Description</li>
+             <li class="ftl-tab col-8 tab-flat tab-active">Details</li>
+             <li class="ftl-tab col-8 tab-flat tab-active">Price</li>
+              -->
+              <div id="info" class="info">
+<ul  class="nav nav-pills">
+			<li class="active">
+        <a  href="#1d" data-toggle="tab">Description</a>
+			</li>
+		  <li><a href="#2p" data-toggle="tab">Picture Details</a>
+			</li>
+  	  <li><a href="#3b" data-toggle="tab">Price</a>
+			</li>
+		</ul>
+
+			<div class="tab-content clearfix">
+			  <div class="tab-pane active" id="1d">
+          <div class="desc_photo"><p>{{photoDetails.description}}</p></div>
+				</div>
+				<div class="tab-pane" id="2p">
+          <div class="p-details">
+             <div class="owner">Owner: {{photoDetails.owner}}</div><br><br>
+          Tags: <span class="tags" ng-repeat="t in photoDetails.tag">
+          <button class="btn" type="button">{{t}}<i class="glyphicon gyphicon-remove"></i></button>
+        </span>
+
+       </div>
+			 	</div>
+
+        <div class="tab-pane" id="3b">
+          <div class="c-content">
+          <h4>Price: <span class="set"> ${{photoDetails.cost}} </span></h4><br>
+          <button class="btn btn-primary buy" type="button" onClick="#">Buy</button>
+        </div>
+				</div>
+
+			</div>
+  </div>
+
+
+          </ul>
+        </div>
+      </div>
+    </div>

@@ -8,15 +8,15 @@ a {
 }
 
 .search{
-  	border-right:0; 
-	box-shadow:0 0 0; 
+  	border-right:0;
+	box-shadow:0 0 0;
 	border-color:#ccc;
 
   }
 
   .search-input{
    	margin-left:5px;
-  	width:95%;
+  	width:80%;
     overflow: hidden;
   
 
@@ -52,12 +52,22 @@ a {
 	height:300px;
 	width:100%;
 	border: 1px solid #ccc;
-}
+  border-radius:20px;
+  /*z-index:-1;*/
+  box-shadow: 10px 10px 5px 		#F8F8F8 ;
+  }
 
 
 .desc {
     padding: 15px;
     text-align: center;
+    transform:scale(1.1);
+
+}
+
+.img-desc{
+ padding-top: 5%;
+  z-index:inherit;
 }
 .myimage:hover {
     border: 1px solid #777;

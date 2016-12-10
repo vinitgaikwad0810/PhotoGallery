@@ -12,11 +12,13 @@
 		<div class="col-md-4">
 			<table class="table table-inverse">
 				<tbody>
-					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==0" >
-						<td><div><img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="desc">{{n.description}}</div></div></td>
-							
-							
+					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==0">
+						<td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false">
+							<img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage"  ng-hide="zoomImage"alt="Responsive image">
+							<div class="desc" ng-show="zoomImage"><img src="{{n.url}}"
+								class="img-fluid, img-thumbnail, myimage"  ng-click="getDetails(n.photo_id)" alt="Responsive image"> <div class="img-desc">{{n.description}}</div>
+							</div></div></td>
 					</tr>
 
 				</tbody>
@@ -26,11 +28,12 @@
 			<table class="table table-inverse">
 				<tbody>
 					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==1">
-						<td><div><img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">	<div class="desc">{{n.description}}</div></div>
+						<td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false"><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" ng-hide="zoomImage" alt="Responsive image">	<div class="desc" ng-show="zoomImage"><img src="{{n.url}}"
+								class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="img-desc">{{n.description}}</div></div>
 							</td>
-						
-							
+
+
 					</tr>
 
 				</tbody>
@@ -40,11 +43,11 @@
 			<table class="table table-inverse">
 				<tbody>
 					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==2">
-						<td><div><img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">
-							<div class="desc">{{n.description}}</div></div>	</td>
-							
-									
+						<td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false"><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">	<div class="desc" ng-show="zoomImage"><img src="{{n.url}}"
+								class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="img-desc">{{n.description}}</div></div></td>
+
+
 					</tr>
 
 				</tbody>
