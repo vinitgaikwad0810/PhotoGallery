@@ -1,5 +1,6 @@
 var mongo = require("./mongo");
 var mongoURL = "mongodb://donita:donita@ds113628.mlab.com:13628/photogallery";
+ Q = require('q')
 
 exports.register = function (req, res){
 
@@ -17,3 +18,5 @@ exports.register = function (req, res){
 
 	res.send("respond with a resource");
 };
+
+

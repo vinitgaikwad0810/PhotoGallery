@@ -13,17 +13,7 @@ angular.module('photoApp').factory('AuthenticationService', ['$http', '$cookieSt
              * 
              ----------------------------------------------*/
 
-            // console.log("Don" + username + password);
-            // // $timeout(function() {
-            // //     var response = {
-            // //         success: username === 'test' && password === 'test'
-            // //     };
-            // //     console.log(response.success);
-            // //     if (!response.success) {
-            // //         response.message = 'Username or password is incorrect';
-            // //     }
-            // //     callback(response.success);
-            // // }, 1000);
+    
 
 
             /* Use this for real authentication
@@ -41,6 +31,9 @@ angular.module('photoApp').factory('AuthenticationService', ['$http', '$cookieSt
 
                     console.log(response);
                     callback(false);
+
+                    // if(response.redirectUrl!=null)
+                    // location.replace(response.redirectUrl); 
                 });
 
 
@@ -57,12 +50,12 @@ angular.module('photoApp').factory('AuthenticationService', ['$http', '$cookieSt
             };
 
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-            $cookieStore.put('globals', $rootScope.globals);
+           // $cookieStore.put('globals', $rootScope.globals);
         };
 
         service.ClearCredentials = function () {
             $rootScope.globals = {};
-            $cookieStore.remove('globals');
+        //    $cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic ';
         };
 

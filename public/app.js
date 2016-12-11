@@ -165,6 +165,12 @@ photoApp.config(function($stateProvider, $urlRouterProvider) {
 
 })
 
+
+// photoApp.config(["$locationProvider", function($locationProvider) {
+//   $locationProvider.html5Mode(true);
+// }]);
+
+
 photoApp.controller('videoController', function($scope) {
 	$scope.pageClass = 'page-video';
 });

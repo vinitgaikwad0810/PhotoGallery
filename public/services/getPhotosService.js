@@ -11,10 +11,13 @@ angular.module('photoApp').factory('GetPhotosService',
             $http.get('/api/getPhotos/'+id).success(function(response){
                	console.log(response);
                	callback(response);
-            });
+            }).catch( function(data) {
 
-        };
+               callback(false);
+            }
+            )};
         
+
 
         service.getMyBuys = function (id, callback) {
 
@@ -24,7 +27,7 @@ angular.module('photoApp').factory('GetPhotosService',
             });
 
         };
-        
-   
+
+
        return service;
  }]);
