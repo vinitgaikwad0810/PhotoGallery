@@ -50,12 +50,12 @@ angular.module('photoApp').factory('AuthenticationService', ['$http', '$cookieSt
             };
 
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-           // $cookieStore.put('globals', $rootScope.globals);
+            $cookieStore.put('globals', $rootScope.globals);
         };
 
         service.ClearCredentials = function () {
             $rootScope.globals = {};
-        //    $cookieStore.remove('globals');
+            $cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic ';
         };
 

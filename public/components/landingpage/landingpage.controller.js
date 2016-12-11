@@ -3,11 +3,12 @@
 
         angular.module('photoApp').controller('landingPageController', Controller, ['$cookieStore', '$rootScope']);
 
-        function Controller($location, $stateParams, $scope, $state, $cookieStore, $rootScope, GetPhotosService, $http, PostPhotoService) {
+        function Controller($location, $stateParams, $scope, $state, $cookieStore, $rootScope, GetPhotosService, $http, PostPhotoService, AuthenticationService) {
             var vm = $scope;
             vm.getDetails = getDetails;
             vm.goToProfilePage = goToProfilePage;
             vm.goToMyPicsPage = goToMyPicsPage;
+            vm.logout = logout;
             initController();
 
             function initController() {
@@ -18,7 +19,22 @@
                 }, 3000);
                 // reset login status
                 // AuthenticationService.Logout();
+
+                $('#tokenfield-typeahead').tokenfield();
+                $('.form-control').css('display','inline-block')
             }
+
+
+
+            function logout() {
+                AuthenticationService.ClearCredentials();
+
+                $http.post('/logout');
+
+                $state.transitionTo('home');
+
+            }
+            
 
 
             function getPhotos(id) {
