@@ -86,6 +86,7 @@
                     // $location.path('/');
                     vm.photos = result.data;
                     //$(".loader").fadeOut("slow");
+                    $scope.loadValue = true;
                 } else {
                     $location.path('/');
 
@@ -174,14 +175,15 @@
                                         console.log("not inserted");
                                     }
                                 });
+
+                                if ($scope.dynamic == 100) {
+                                    $(".modal").modal('hide');
+                                }
                             } else {
                                 alert('Could not upload file.');
                             }
                         }
                     };
-                    if ($scope.dynamic == 100) {
-                        $(".modal").modal('hide');
-                    }
                     console.log("file" + file);
                     xhr.send(file);
                 }, function (response) {
