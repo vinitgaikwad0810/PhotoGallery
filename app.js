@@ -20,7 +20,7 @@ var express = require('express')
     , aws = require('./aws-upload/upload');
 
 
-var client = redis.createClient();
+// var client = redis.createClient();
 var app = express();
 
 // all environments
@@ -168,7 +168,7 @@ app.get('/api/getMyBuys/:id', photos.getMyBuys);
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
 app.post('/api/uploadPics', photos.uploadPhotos);
-
+app.put('/api/putPicDetails/:id/:ratings/:username',photos.putPicDetails);
 app.get('/users', user.list);
 app.get('/api/getImageDetails/:id', photos.getImageDetails);
 
@@ -189,6 +189,3 @@ app.get('/', routes.index);
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
-
-
-

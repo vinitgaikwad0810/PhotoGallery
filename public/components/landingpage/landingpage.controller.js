@@ -76,7 +76,7 @@
             }
 
             var getUrl = function (file) {
-                var s3 = new AWS.S3({params: {Bucket: 'photogallerybuckets'}});
+                var s3 = new AWS.S3({params: {Bucket: 'photobucket280'}});
                 $http.get('/aws?filename=' + file.name + '&filetype=' + file.type)
                     .then(function (response) {
                         const xhr = new XMLHttpRequest();
