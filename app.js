@@ -171,6 +171,8 @@ app.post('/api/uploadPics', photos.uploadPhotos);
 
 app.get('/users', user.list);
 app.get('/api/getImageDetails/:id', photos.getImageDetails);
+app.get('/api/getPhotosByTags/:tag', photos.getPhotosByTag);
+
 
 app.post('/logout', function(req, res){
   var name = req.user.username;
