@@ -8,6 +8,7 @@
             vm.getDetails = getDetails;
             vm.goToProfilePage = goToProfilePage;
             vm.goToMyPicsPage = goToMyPicsPage;
+            vm.search = search;
             $scope.progress = "0%";
             vm.logout = logout;
             $("#uploadButton").draggable({cancel:false});
@@ -15,29 +16,65 @@
 
             function initController() {
                 var id = $stateParams.id;
-
-                setTimeout(function () {
-                    getPhotos(id)
-                }, 3000);
+                getPhotos(id)
                 // reset login status
                 // AuthenticationService.Logout();
-
                 $('#tokenfield-typeahead').tokenfield();
                 $('.form-control').css('display','inline-block')
             }
 
-
-
             function logout() {
                 AuthenticationService.ClearCredentials();
-
                 $http.post('/logout');
-
                 $state.transitionTo('home');
-
             }
 
+            function search() {
 
+            var tokenlist = [$('#tokenfield-typeahead').tokenfield('getTokensList')];
+            console.log("tokenlist");
+            console.log(tokenlist);
+            var tags = tokenlist[0].split(",");
+            vm.photos = [];
+            GetPhotosService.getPhotosByTags(tags, function (response) {
+
+                console.log("Search Result");
+                console.log(response);
+
+                if (true) {
+                    for (var i = 0; i < response.data.length; i++) {
+                        console.log("Iter" + i);
+                        console.log(response.data[i].imageData);
+                        vm.photos[vm.photos.length] = response.data[i].imageData;
+                    }
+
+
+                } else {
+                    vm.photos[vm.photos.length] = response.data.imageData;
+                }
+                vm.photos = removeDuplicates(vm.photos, 'url');
+            })
+
+
+        }
+
+        function removeDuplicates(originalArray, objKey) {
+            var trimmedArray = [];
+            var values = [];
+            var value;
+
+            for (var i = 0; i < originalArray.length; i++) {
+                value = originalArray[i][objKey];
+
+                if (values.indexOf(value) === -1) {
+                    trimmedArray.push(originalArray[i]);
+                    values.push(value);
+                }
+            }
+
+            return trimmedArray;
+
+        }
 
             function getPhotos(id) {
                 console.log("State Params" + id);
