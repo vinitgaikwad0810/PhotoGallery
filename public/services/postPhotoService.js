@@ -11,15 +11,11 @@ angular.module('photoApp').factory('PostPhotoService',
           $http.post('/api/uploadPics/', {
                   imageData: imageData,
               })
-              .then(function(response) {
+              .success(function(response) {
                   console.log(response)
-                  callback(true);
-              })
-              .catch(function(response) {
-
-                  console.log(response);
-                  callback(false);
+                  callback(response);
               });
+
         };
 
        return service;

@@ -8,6 +8,7 @@
             vm.getDetails = getDetails;
             vm.goToProfilePage = goToProfilePage;
             vm.goToMyPicsPage = goToMyPicsPage;
+            $scope.progress = "0%";
             initController();
 
             function initController() {
@@ -29,6 +30,7 @@
                         console.log(result.data);
                         // $location.path('/');
                         vm.photos = result.data;
+                        //$(".loader").fadeOut("slow");
                     } else {
                         $location.path('/');
 
@@ -57,17 +59,26 @@
 
 
             $scope.fileUpload = function () {
+              $('#landingProgressBar').css("width","0%").attr('aria-valuenow',0);
+
+              $(".progress").css({"display":"none"});
+
+              if ($scope.dynamic == 100) {
+                $scope.dynamic = 0;
+              }
                 $("#Upload").click();
             }
 
             $scope.uploadToS3 = function () {
-                var files = $("#Upload")[0].files;
+                 var files = $("#Upload")[0].files;
                 var promises = [];
+                //$(".modal").modal('hide');
+                $(".progress").css({"display":"block"});
                 if (files.length > 0) {
                     $scope.max = files.length;
                     $scope.dynamic = 0;
                     angular.forEach(files, function (value, key) {
-                        getUrl(value);
+                        getUrl(value, key);
                     });
                     //console.log("$data");
 
@@ -75,30 +86,47 @@
                 }
             }
 
-            var getUrl = function (file) {
-                var s3 = new AWS.S3({params: {Bucket: 'photogallerybuckets'}});
+            var getUrl = function (file, key) {
+                var s3 = new AWS.S3({params: {Bucket: ''}});
                 $http.get('/aws?filename=' + file.name + '&filetype=' + file.type)
                     .then(function (response) {
                         const xhr = new XMLHttpRequest();
-                        var tags = [$("tokenField-0").tokenfield('getTokensList')];
+                        var tagNum = $("#tokenField-"+key).tokenfield('getTokens').length;
+                        var tags = [];
+                        for (var i=0; i<tagNum;i++) {
+                          tags  .push($("#tokenField-"+key).tokenfield('getTokens')[i].value);
+                        }
                         var jsondata = new Object();
                         jsondata["url"] = response["data"];
                         jsondata["tags"] = tags;
-                        jsondata["username"] = $cookieStore.get('globals').currentUser.username;
+                        jsondata["owner"] = $cookieStore.get('globals').currentUser.username;
                         jsondata["ratings"] = 0;
+
+                        var valuer = $scope.dynamic + (100/$scope.max);
+                        $scope.dynamic = valuer;
+                        $('#landingProgressBar').css("width",valuer+'%').attr('aria-valuenow',valuer);
+
                         xhr.open('PUT', response["data"]);
                         xhr.onreadystatechange = function () {
                             if (xhr.readyState === 4) {
                                 if (xhr.status === 200) {
-                                    alert('successful');
-                                    $scope.dynamic = $scope.dynamic + 1;
+                                    //alert('successful');
                                     //$scope.data.push(jsondata);
-                                    PostPhotoService.postPhoto(jsondata);
+                                    PostPhotoService.postPhoto(jsondata, function(result){
+              											if (result.status_code == 200) {
+              												console.log("inserted");
+              											} else {
+              												console.log("not inserted");
+              											}
+              										});
                                 } else {
                                     alert('Could not upload file.');
                                 }
                             }
                         };
+                        if ($scope.dynamic == 100) {
+                          $(".modal").modal('hide');
+                        }
                         console.log("file" + file);
                         xhr.send(file);
                     }, function (response) {
@@ -131,6 +159,7 @@
                 $("#previewModal").modal({backdrop: false});
 
                 $(".modal").modal('show');
+
                 //var totalwidth = 190 * $('.tableData').length;
                 //$(".modal-body").css('width', totalwidth);
 

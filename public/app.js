@@ -96,7 +96,7 @@ photoApp.config(function($stateProvider, $urlRouterProvider) {
 
 													controller : 'landingPageController'
 												},
-												
+
 													'content' : {
 
 
@@ -160,7 +160,7 @@ photoApp.config(function($stateProvider, $urlRouterProvider) {
 													}
 												}
 
-											});				
+											});
 
 
 })
