@@ -172,7 +172,7 @@ app.post('/api/uploadPics', photos.uploadPhotos);
 app.get('/users', user.list);
 app.get('/api/getImageDetails/:id', photos.getImageDetails);
 
-app.get('/logout', function(req, res){
+app.post('/logout', function(req, res){
   var name = req.user.username;
   console.log("LOGGIN OUT " + req.user.username)
   req.logout();
