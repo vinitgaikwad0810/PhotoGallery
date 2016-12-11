@@ -6,8 +6,11 @@ aws.config.loadFromPath('config.json');
 
 exports.uploadImage = function(request, response) {
   var dateTime = new Date();
+  var date = dateTime.toDateString().replace(/ /g,"_") + "_";
+  var time = dateTime.toLocaleTimeString().replace(/ /g,"_") +"_";
   var s3 = new aws.S3();
-  var params= {Bucket: '', Key:request.query['filename'], ContentType:request.query['filetype'], ACL: 'public-read-write'} ;
+  var params= {Bucket: '', Key:date
+              +time+request.query['filename'], ContentType:request.query['filetype'], ACL: 'public-read-write'} ;
   s3.getSignedUrl('putObject', params, function(error, link){
     if (error) {
 
@@ -18,6 +21,4 @@ exports.uploadImage = function(request, response) {
       response.send(responseLink);
     }
   });
-  //response.send(200);
-
 }

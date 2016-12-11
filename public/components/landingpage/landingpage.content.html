@@ -1,4 +1,5 @@
 <div class="{{PageClass}}">
+	<div id="loader" ng-hide="loadValue" class="ng-hide"></div>
 	<div class="search" style="padding-top:20px;">
 	<span>
 		<input autofocus type="text" class="search-input" id="tokenfield-typeahead" placeholder="Search pictures" />
@@ -59,7 +60,7 @@
 	</div>
 
 
-		<button type="button" id="uploadButton" class="btn btn-default btn-circle btn-lg" ng-click="fileUpload()">
+		<button type="button" id="uploadButton" class="btn btn-default btn-circle btn-lg draggable" ng-click="fileUpload()">
 						<i class="glyphicon glyphicon-plus"></i>
 					</button>
 					<!--<input type="file" id="upload"> -->

@@ -10,6 +10,7 @@
             vm.goToMyPicsPage = goToMyPicsPage;
             $scope.progress = "0%";
             vm.logout = logout;
+            $("#uploadButton").draggable({cancel:false});
             initController();
 
             function initController() {
@@ -35,7 +36,7 @@
                 $state.transitionTo('home');
 
             }
-            
+
 
 
             function getPhotos(id) {
@@ -46,6 +47,9 @@
                         console.log(result.data);
                         // $location.path('/');
                         vm.photos = result.data;
+
+                        $scope.loadValue = true;
+
                         //$(".loader").fadeOut("slow");
                     } else {
                         $location.path('/');
@@ -131,6 +135,10 @@
                                     PostPhotoService.postPhoto(jsondata, function(result){
               											if (result.status_code == 200) {
               												console.log("inserted");
+
+                                      if ($scope.dynamic == 100) {
+                                        $(".modal").modal('hide');
+                                      }
               											} else {
               												console.log("not inserted");
               											}
@@ -140,9 +148,6 @@
                                 }
                             }
                         };
-                        if ($scope.dynamic == 100) {
-                          $(".modal").modal('hide');
-                        }
                         console.log("file" + file);
                         xhr.send(file);
                     }, function (response) {
