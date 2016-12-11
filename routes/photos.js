@@ -55,10 +55,10 @@ exports.getImageDetails= function(req, res){
 	});
 };
 exports.getMyBuys = function(req, res){
-	
+
 	var id=req.params.id;
 	console.log("id:"+id);
-	
+
 	mongo.connect(mongoURL,function(){
 		var coll=mongo.collection('photo');
 		coll.find({
@@ -82,13 +82,13 @@ exports.getMyBuys = function(req, res){
 
 
 exports.uploadPhotos = function(req, res){
-	
+
 	var docs=req.body;
 	console.log("docs:"+docs);
 	mongo.connect(mongoURL,function() {
 
-		mongo.collection('photos').insertOne(req.body,function(err, result) {
-	    
+		mongo.collection('photo').insertOne(req.body,function(err, result) {
+
 				if(err){
 					json_responses.status_code=500;
 					console.log(err);
@@ -96,11 +96,9 @@ exports.uploadPhotos = function(req, res){
 				}else{
 					json_responses.status_code=200;
 					res.send( json_responses);
-				}  
+				}
 	  	});
 
-		});	
+		});
 
 };
-
-

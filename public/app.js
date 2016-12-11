@@ -161,8 +161,6 @@ photoApp.config(function ($stateProvider, $urlRouterProvider) {
 
             });
 
-
-
 })
 
 

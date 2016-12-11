@@ -89,14 +89,18 @@
 								</tr>
 							</tbody>
 						</table>
+						<div class="progress-bar progress-bar-striped active" role="progressbar" id="landingProgressBar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+					      {{dynamic}}%
+					    </div>
 				  </div>
+
 	        <div class="modal-footer">
 	          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="destroy()">Close</button>
-						<button type="button" class="btn btn-primary" ng-click="uploadToS3()">Upload</button>
+						<button type="button" class="btn btn-primary" ng-click="uploadToS3()" id="uploadImage">Upload</button>
 	        </div>
 	      </div>
 
 	    </div>
 		</div>
-		<uib-progressbar max="max" value="dynamic"><span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span></uib-progressbar>
+
 	</div>
