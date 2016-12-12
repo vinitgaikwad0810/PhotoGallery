@@ -23,7 +23,7 @@ vm.getImageDetails=getImageDetails;
 				GetImageDetailsService.getImageDetails(id, function(result) {
 					if (result) {
 						console.log(result.data);
-						vm.photoDetails = result.data[0];
+						vm.photoDetails = result.data;
 					} else {
 
 					}

@@ -5,122 +5,117 @@
 <title>My Pics</title>
 </head>
 <body>
-<script>
-$(document).ready(function(){
-	$('a').click(function (e) {
-	      e.preventDefault();
-	  });
-});
-</script>
-<div class="container">
-  
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#mypics" >My Pics</a></li>
-    <li><a data-toggle="tab" href="#mybuys" >My Buys</a></li>
+	<script>
+		$(document).ready(function() {
+			$('a').click(function(e) {
+				e.preventDefault();
+			});
+		});
+	</script>
+	
+	<div class="container">
+ 
+ 
 
-  </ul>
-
-  <div class="tab-content">
-    <div id="mypics" class="tab-pane fade in active">
-      <h3>My Pics</h3>
-      <div class="row" style="margin-top:50px;">
-		<div class="col-md-4">
-			<table class="table table-inverse">
-				<tbody>
-					<tr ng-repeat="n in mypics track by $index" ng-if="$index%3==0" >
-						<td><div><img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="desc">{{n.description}}</div></div></td>
-							
-							
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-4">
-			<table class="table table-inverse">
-				<tbody>
-					<tr ng-repeat="n in mypics track by $index" ng-if="$index%3==1">
-						<td><div><img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">	<div class="desc">{{n.description}}</div></div>
-							</td>
-						
-							
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-4">
-			<table class="table table-inverse">
-				<tbody>
-					<tr ng-repeat="n in mypics track by $index" ng-if="$index%3==2">
-						<td><div><img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">
-							<div class="desc">{{n.description}}</div></div>	</td>
-							
-									
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
-
-	</div>
-      
-      
-      
-    </div>
-    <div id="mybuys" class="tab-pane fade">
-      <h3>My Buys</h3>
-      <div class="row" style="margin-top:50px;">
-		<div class="col-md-4">
-			<table class="table table-inverse">
-				<tbody>
-					<tr ng-repeat="n in mybuys track by $index" ng-if="$index%3==0" >
-						<td><div><img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="desc">{{n.description}}</div></div></td>
-							
-							
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-4">
-			<table class="table table-inverse">
-				<tbody>
-					<tr ng-repeat="n in mybuys track by $index" ng-if="$index%3==1">
-						<td><div><img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">	<div class="desc">{{n.description}}</div></div>
-							</td>
-						
-							
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-4">
-			<table class="table table-inverse">
-				<tbody>
-					<tr ng-repeat="n in mybuys track by $index" ng-if="$index%3==2">
-						<td><div><img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">
-							<div class="desc">{{n.description}}</div></div>	</td>
-							
-									
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
-
-	</div>
-    </div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
     
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Photo Details</h4>
+        </div>
+        <div class="modal-body">
+             <p>							<form class="form-horizontal" role="form">
+											<label class="control-label">Title:</label>
+											<input class="form-control"  id="modalTitle" class="form-control" value="" type="text">
+											<label class="control-label">Description:</label>
+											<input class="form-control" id="modalDesc" class="form-control" value="" type="text">
+											<label class="control-label">Cost:</label>
+											<input class="form-control"  id="modalCost" class="form-control" value="0" type="number">
+												
+											</form></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editPhotoDetails()">Save Changes</button>
+        </div>
+      </div>
+      
+    </div>
   </div>
+  
 </div>
-
+	<div class="container">
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#mypics"
+				ng-click="selected='mypics';pics=mypics">My Pics</a></li>
+			<li><a data-toggle="tab" href="#mybuys"
+				ng-click="selected='mybuys';pics=mybuys">My Buys</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="{{selected}}" class="tab-pane fade in active">
+				<h3>My Pics</h3>
+				<div class="row" style="margin-top: 50px;">
+					<div class="col-md-4">
+						<table class="table table-inverse">
+							
+							<tbody>
+								<tr ng-repeat="n in pics track by $index" ng-if="$index%3==0">
+									<td><div>
+											<img src="{{n.imageData.url}}"
+												class="img-fluid, img-thumbnail, myimage"
+												alt="Responsive image" id="{{'myImage-' + $index}}" ng-click="openMyDialog(n)"></img>
+											<div ng-if="selected=='mybuys'" class="desc">{{n.imageData.description}}</div>
+											<div class="desc" ng-if="selected=='mypics'">
+										
+											</div>
+										</div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-md-4">
+						<table class="table table-inverse">
+							<tbody>
+								<tr ng-repeat="n in pics track by $index" ng-if="$index%3==1">
+									<td><div>
+											<img src="{{n.imageData.url}}"
+												class="img-fluid, img-thumbnail, myimage"
+												alt="Responsive image" id="{{'myImage-' + $index}}" ng-click="openMyDialog(n)">
+													<div class="desc" ng-if="selected=='mypics'">
+											</div><div class="desc" ng-if="selected=='mybuys'" >{{n.imageData.description}}</div>
+										</div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-md-4">
+						<table class="table table-inverse">
+							<tbody>
+								<tr ng-repeat="n in pics track by $index" ng-if="$index%3==2">
+									<td><div>
+											<img src="{{n.imageData.url}}"
+												class="img-fluid, img-thumbnail, myimage"
+												alt="Responsive image" id="{{'myImage-' + $index}}" ng-click="openMyDialog(n)">
+											<div class="desc" ng-if="selected=='mypics'" >
+											</div>
+											<div class="desc" ng-if="selected=='mybuys'" >{{n.imageData.description}}</div>
+										</div>
+										</div>
+										</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
 </body>
 </html>

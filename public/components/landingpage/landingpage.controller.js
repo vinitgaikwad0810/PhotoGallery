@@ -9,14 +9,15 @@
             vm.goToProfilePage = goToProfilePage;
             vm.goToMyPicsPage = goToMyPicsPage;
             vm.logout = logout;
+            vm.goToLandingPage=goToLandingPage;
             initController();
 
             function initController() {
                 var id = $stateParams.id;
-
-                setTimeout(function () {
-                    getPhotos(id)
-                }, 3000);
+                vm.photos=[];
+                
+                    getPhotos(id);
+               
                 // reset login status
                 // AuthenticationService.Logout();
 
@@ -43,8 +44,18 @@
                 GetPhotosService.getPhotos(id, function (result) {
                     if (result) {
                         console.log(result.data);
-                        // $location.path('/');
-                        vm.photos = result.data;
+                        var length=result.data.length;
+                     
+                        console.log(vm.photos);
+                        vm.photos = [];
+                        for(var i=0;i<length;i++){
+                        
+                        	vm.photos[vm.photos.length]=result.data[i].imageData;
+                        	console.log(vm.photos);
+                        	//if (typeof vm.photos[vm.photos.length-1] != undefined)
+                        		//vm.photos[vm.photos.length-1]._id=result.data[i]._id;
+                        }
+                     
                     } else {
                         $location.path('/');
 
@@ -52,6 +63,11 @@
                 });
             };
 
+            function goToLandingPage() {
+                var id = $cookieStore.get('globals').currentUser.username;
+                $state.transitionTo('landingpage', {id: id});
+
+            };
             function goToProfilePage() {
                 var id = $cookieStore.get('globals').currentUser.username;
                 $state.transitionTo('profilepage', {id: id});

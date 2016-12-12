@@ -20,7 +20,7 @@ var express = require('express')
     , aws = require('./aws-upload/upload');
 
 
-var client = redis.createClient();
+//var client = redis.createClient();
 var app = express();
 
 // all environments
@@ -133,7 +133,7 @@ if ('development' == app.get('env')) {
 
 app.get('/api/getPhotos/:id', photos.getPhotos);
 
-
+app.get('/api/getMyPhotos/:id', photos.getMyPhotos);
 
 app.post('/api/register', registration.register);
 
@@ -156,6 +156,7 @@ app.get('/renderError', function (req, res) {
 
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
+app.post('/api/editPhotoDetails', photos.editPhotoDetails);
 app.get('/api/getImageDetails/:id',photos.getImageDetails);
 
 
