@@ -183,6 +183,11 @@ function run($rootScope, $http, $location, $cookieStore) {
     console.log(id);
 
 
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+        $('.test.className').filter(function () {
+            return this.textContent === 'content';
+        }).slice(0, -1).remove();
+    });
 
 }
 

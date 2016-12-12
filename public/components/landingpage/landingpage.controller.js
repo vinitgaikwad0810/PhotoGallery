@@ -29,6 +29,7 @@
                 $state.transitionTo('home');
             }
 
+
             function search() {
 
             var tokenlist = [$('#tokenfield-typeahead').tokenfield('getTokensList')];

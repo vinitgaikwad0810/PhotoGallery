@@ -15,7 +15,7 @@ exports.getPhotos = function (req, res) {
     mongo.connect(mongoURL, function () {
         var coll = mongo.collection('photo');
         coll.find({
-            "owner": id
+            "imageData.owner": id
         }).toArray(function (err, photos) {
             if (photos) {
                 json_responses.status_code = 200;
