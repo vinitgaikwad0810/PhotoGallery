@@ -145,7 +145,7 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-app.get('/api/getPhotos/:id', loggedIn, photos.getPhotos);
+app.get('/api/getPhotos/:id', photos.getPhotos);
 
 
 app.post('/api/register', registration.register);
