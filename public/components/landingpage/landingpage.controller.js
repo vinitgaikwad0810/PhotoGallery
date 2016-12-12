@@ -60,6 +60,7 @@
 
         }
 
+
         function removeDuplicates(originalArray, objKey) {
             var trimmedArray = [];
             var values = [];
@@ -145,7 +146,7 @@
         }
 
         var getUrl = function (file, key) {
-            var s3 = new AWS.S3({params: {Bucket: 'photobucket280'}});
+            var s3 = new AWS.S3({params: {Bucket: ''}});
             $http.get('/aws?filename=' + file.name + '&filetype=' + file.type)
                 .then(function (response) {
                     const xhr = new XMLHttpRequest();

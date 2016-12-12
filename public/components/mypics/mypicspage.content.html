@@ -1,7 +1,15 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<script>
+$(document).ready(function(){
+	$('a').click(function (e) {
+	      e.preventDefault();
+	  });
+});
+</script>
 <title>My Pics</title>
 </head>
 <body>
@@ -13,7 +21,7 @@ $(document).ready(function(){
 });
 </script>
 <div class="container">
-  
+
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#mypics" >My Pics</a></li>
     <li><a data-toggle="tab" href="#mybuys" >My Buys</a></li>
@@ -30,8 +38,8 @@ $(document).ready(function(){
 					<tr ng-repeat="n in mypics track by $index" ng-if="$index%3==0" >
 						<td><div><img src="{{n.url}}"
 							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="desc">{{n.description}}</div></div></td>
-							
-							
+
+
 					</tr>
 
 				</tbody>
@@ -44,8 +52,8 @@ $(document).ready(function(){
 						<td><div><img src="{{n.url}}"
 							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">	<div class="desc">{{n.description}}</div></div>
 							</td>
-						
-							
+
+
 					</tr>
 
 				</tbody>
@@ -58,8 +66,8 @@ $(document).ready(function(){
 						<td><div><img src="{{n.url}}"
 							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">
 							<div class="desc">{{n.description}}</div></div>	</td>
-							
-									
+
+
 					</tr>
 
 				</tbody>
@@ -67,9 +75,9 @@ $(document).ready(function(){
 		</div>
 
 	</div>
-      
-      
-      
+
+
+
     </div>
     <div id="mybuys" class="tab-pane fade">
       <h3>My Buys</h3>
@@ -80,8 +88,8 @@ $(document).ready(function(){
 					<tr ng-repeat="n in mybuys track by $index" ng-if="$index%3==0" >
 						<td><div><img src="{{n.url}}"
 							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="desc">{{n.description}}</div></div></td>
-							
-							
+
+
 					</tr>
 
 				</tbody>
@@ -94,8 +102,8 @@ $(document).ready(function(){
 						<td><div><img src="{{n.url}}"
 							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">	<div class="desc">{{n.description}}</div></div>
 							</td>
-						
-							
+
+
 					</tr>
 
 				</tbody>
@@ -108,8 +116,8 @@ $(document).ready(function(){
 						<td><div><img src="{{n.url}}"
 							class="img-fluid, img-thumbnail, myimage" alt="Responsive image">
 							<div class="desc">{{n.description}}</div></div>	</td>
-							
-									
+
+
 					</tr>
 
 				</tbody>
@@ -118,7 +126,7 @@ $(document).ready(function(){
 
 	</div>
     </div>
-    
+
   </div>
 </div>
 
