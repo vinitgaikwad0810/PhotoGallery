@@ -59,36 +59,6 @@ passport.deserializeUser(function (username, done) {
     //done(null, user);
 });
 
-
-// passport.use('local-signin', new LocalStrategy(
-//     //allows us to pass back the request to the callback
-//     function (username, password, done) {
-//         authentication.localAuth(username, password)
-//             .then(function (user) {
-
-
-//                 if (user) {
-//                     console.log("LOGGED IN AS: " + user.password);
-//                    // req.session.success = 'You are successfully logged in ' + user.username + '!';
-//                     console.log("fffdgfd");
-//                     return done(null, user);
-//                     //res.status(200).send("Success");
-//                 }
-//                 if (!user) {
-//                     console.log("COULD NOT LOG IN");
-//                     req.session.error = 'Could not log user in. Please try again.'; //inform user could not log them in
-//                      return done(null, false);
-//                 }
-//             })
-//             .fail(function (err) {
-//                 console.log(err.body);
-//             });
-
-
-//     }
-// ));
-
-
 passport.use('local-signin', new LocalStrategy(
     function (username, password, done) {
         authentication.findUser(username, password, function (err, user) {
@@ -114,18 +84,6 @@ function authenticationMiddleware() {
 }
 
 passport.authenticationMiddleware = authenticationMiddleware;
-
-
-// Simple route middleware to ensure user is authenticated.
-// function ensureAuthenticated(req, res, next) {
-//     if (req.isAuthenticated()) {
-//         return next();
-//     }
-//     req.session.error = 'Please sign in!';
-//     res.redirect('/signin');
-// }
-
-
 // development only
 if ('development' == app.get('env')) {
     app.use(express.errorHandler());
@@ -168,7 +126,7 @@ app.get('/api/getMyBuys/:id', photos.getMyBuys);
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
 app.post('/api/uploadPics', photos.uploadPhotos);
-app.put('/api/putPicDetails/:id/:ratings/:username',photos.putPicDetails);
+app.put('/api/putPicDetails',photos.putPicDetails);
 app.get('/users', user.list);
 app.get('/api/getImageDetails/:id', photos.getImageDetails);
 app.get('/api/getPhotosByTags/:tag', photos.getPhotosByTag);

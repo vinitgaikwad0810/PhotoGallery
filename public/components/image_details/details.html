@@ -6,26 +6,19 @@ $(document).ready(function(){
 	  });
 });
 </script>
-    <!-- <br><br><br> <p>Sample Test</p>{{photoDetails.description}} -->
+
  <br>
 
 <div class="row total_div">
     <div class=" col-md-5 i_detail">
-        <div class="i_title"><h1>{{photoDetails.photo_name}}</h1>
-            <div><img src="{{photoDetails.url}}" alt="sorry no image" class="samp-img">
+        <div class="i_title"><h1>{{photoDetails.imageData.photo_name}}</h1>
+            <div><img src="{{photoDetails.imageData.url}}" alt="sorry no image" class="samp-img">
             </div>
 
         </div>
     </div>
 
     <div class="col-md-6 detail_desc">
-        <!-- <div class="content-data">
-          <ul class="tabs-group">
-             <li class="ftl-tab col-8 tab-flat tab-active">Description</li>
-             <li class="ftl-tab col-8 tab-flat tab-active">Details</li>
-             <li class="ftl-tab col-8 tab-flat tab-active">Price</li>
-              -->
-
         <div id="info" class="info">
             <ul class="nav nav-pills">
                 <li class="active">
@@ -39,11 +32,11 @@ $(document).ready(function(){
 
             <div class="tab-content clearfix">
                 <div class="tab-pane active" id="1d">
-                    <div class="desc_photo"><p>{{photoDetails.description}}</p></div>
+                    <div class="desc_photo"><p>{{photoDetails.imageData.description}}</p></div>
                 </div>
                 <div class="tab-pane" id="2p">
                     <div class="p-details">
-                        <div class="owner">Owner: {{photoDetails.owner}}</div>
+                        <div class="owner">Owner: {{photoDetails.imageData.owner}}</div>
                         <br><br>
                         Tags: <span class="tags" ng-repeat="t in photoDetails.tag">
 
@@ -55,8 +48,8 @@ $(document).ready(function(){
 
         <div class="tab-pane" id="3b">
           <div class="c-content">
-          <h4>Price: <span class="set"> ${{photoDetails.cost}} </span></h4><br>
-          <button class="btn btn-primary buy" type="button" ng-click="putPicDetails(photoDetails._id,photoDetails.ratings,photoDetails.bought_by)">Buy</button>
+          <h4>Price: <span class="set"> ${{photoDetails.imageData.cost}} </span></h4><br>
+          <button class="btn btn-primary buy" type="button" ng-click="putPicDetails(photoDetails._id,photoDetails.imageData.ratings,photoDetails.imageData.bought_by)">Buy</button>
         </div>
 				</div>
 
