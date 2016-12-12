@@ -74,10 +74,10 @@
                     values.push(value);
                 }
             }
+
             return trimmedArray;
 
         }
-
 
 
         function getPhotos(id) {
@@ -146,7 +146,7 @@
         }
 
         var getUrl = function (file, key) {
-            var s3 = new AWS.S3({params: {Bucket: ''}});
+            var s3 = new AWS.S3({params: {Bucket: 'photobucket280'}});
             $http.get('/aws?filename=' + file.name + '&filetype=' + file.type)
                 .then(function (response) {
                     const xhr = new XMLHttpRequest();

@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -125,14 +124,21 @@ passport.authenticationMiddleware = authenticationMiddleware;
 //     res.redirect('/signin');
 // }
 
+function loggedIn(req, res, next) {
+    if (!req.user) {
+        res.status(404).send("Unauthorized");
+    }else{
+        next();
+    }
+
+}
 
 // development only
 if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-app.get('/api/getPhotos/:id', photos.getPhotos);
-
+app.get('/api/getPhotos/:id', loggedIn, photos.getPhotos);
 
 
 app.post('/api/register', registration.register);
@@ -156,13 +162,13 @@ app.get('/renderError', function (req, res) {
 
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
-app.get('/api/getImageDetails/:id',photos.getImageDetails);
+app.get('/api/getImageDetails/:id', photos.getImageDetails);
 
 
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
 
-app.get('/api/getImageDetails/:id',photos.getImageDetails);
+app.get('/api/getImageDetails/:id', photos.getImageDetails);
 
 app.get('/api/getMyBuys/:id', photos.getMyBuys);
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
@@ -174,12 +180,12 @@ app.get('/api/getImageDetails/:id', photos.getImageDetails);
 app.get('/api/getPhotosByTags/:tag', photos.getPhotosByTag);
 
 
-app.post('/logout', function(req, res){
-  var name = req.user.username;
-  console.log("LOGGIN OUT " + req.user.username)
-  req.logout();
-  res.redirect('/');
-  req.session.notice = "You have successfully been logged out " + name + "!";
+app.post('/logout', function (req, res) {
+    var name = req.user.username;
+    console.log("LOGGIN OUT " + req.user.username)
+    req.logout();
+    res.redirect('/');
+    req.session.notice = "You have successfully been logged out " + name + "!";
 });
 
 app.get('/aws', aws.uploadImage);
