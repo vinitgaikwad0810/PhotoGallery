@@ -82,7 +82,7 @@
                 $state.transitionTo('profilepage', {id: id});
 
               
-
+            };
 
 
         function removeDuplicates(originalArray, objKey) {
