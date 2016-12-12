@@ -56,6 +56,7 @@
                     for (var i = 0; i < response.data.length; i++) {
                         console.log("Iter" + i);
                         console.log(response.data[i].imageData);
+
                         vm.photos[vm.photos.length] = response.data[i].imageData;
                     }
 
@@ -99,7 +100,7 @@
                     vm.photos = result.data;
                     //$(".loader").fadeOut("slow");
                 } else {
-                    $location.path('/');
+                    $state.transitionTo('home');
 
                 }
             });

@@ -134,35 +134,57 @@ photoApp.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
 
-        })
+        }).state(
+        'mypicspage',
+        {
+            url: '/mypicspage/:id',
+            views: {
 
+                'header': {
+                    templateUrl: '/components/landingpage/header.html',
+                    controller: 'landingPageController'
 
-        .state(
-            'mypicspage',
-            {
-                url: '/mypicspage/:id',
-                views: {
+                },
 
-                    'header': {
-                        templateUrl: '/components/landingpage/header.html',
-                        controller: 'landingPageController'
+                'content': {
+                    templateUrl: '/components/mypics/mypicspage.content.html',
+                    controller: 'myPicsPageController'
 
-                    },
-
-                    'content': {
-                        templateUrl: '/components/mypics/mypicspage.content.html',
-                        controller: 'myPicsPageController'
-
-                    },
-                    'footer': {
-                        templateUrl: '/shared/footer/footer.html'
-                    }
+                },
+                'footer': {
+                    templateUrl: '/shared/footer/footer.html'
                 }
+            }
 
-            });
+        });
 
-})
+});
 
+photoApp.run(run);
+
+function run($rootScope, $http, $location, $cookieStore) {
+    // keep user logged in after page refresh
+
+    if ($cookieStore.get('globals')) {
+        var id = $cookieStore.get('globals').currentUser.username;
+
+    } else {
+        $location.path('/');
+    }
+
+
+    // if ($rootScope.globals) {
+    //     if (id !== $rootScope.globals.username) {
+    //         $location.path('/');
+    //     }
+    //
+    // }
+    console.log("cookie id");
+    console.log(id);
+
+
+
+}
 
 // photoApp.config(["$locationProvider", function($locationProvider) {
 //   $locationProvider.html5Mode(true);
@@ -171,6 +193,7 @@ photoApp.config(function ($stateProvider, $urlRouterProvider) {
 
 photoApp.controller('videoController', function ($scope) {
     $scope.pageClass = 'page-video';
+
 });
 
 photoApp.controller('imageGridController', function ($scope) {

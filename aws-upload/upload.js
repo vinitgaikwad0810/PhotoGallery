@@ -4,6 +4,11 @@ var url = require('url');
 
 aws.config.loadFromPath('config.json');
 
+
+aws.config.region = process.env.S3_REGION;
+aws.config.accessKeyId = process.env.S3_KEY;
+aws.config.secretAccessKey = process.env.S3_SECRET;
+
 exports.uploadImage = function(request, response) {
   var dateTime = new Date();
   var s3 = new aws.S3();
