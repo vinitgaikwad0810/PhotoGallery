@@ -2,7 +2,7 @@
 var aws = require('aws-sdk');
 var url = require('url');
 
-aws.config.loadFromPath('config.json');
+//aws.config.loadFromPath('config.json');
 
 
 aws.config.region = process.env.S3_REGION;
