@@ -7,9 +7,9 @@ angular.module('photoApp').factory('GetImageDetailsService',
         var service = {};
 
         service.getImageDetails = function (id, callback) {
-
+						console.log("Id in service"+id)
             $http.get('/api/getImageDetails/'+id).success(function(response){
-               	console.log(response);
+               	console.log("Image details response"+JSON.stringify(response));
                	callback(response);
             });
 

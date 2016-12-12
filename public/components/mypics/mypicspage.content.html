@@ -1,17 +1,19 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<script>
+$(document).ready(function(){
+	$('a').click(function (e) {
+	      e.preventDefault();
+	  });
+});
+</script>
 <title>My Pics</title>
 </head>
 <body>
-	<script>
-		$(document).ready(function() {
-			$('a').click(function(e) {
-				e.preventDefault();
-			});
-		});
-	</script>
+
 	
 	<div class="container">
  
@@ -28,25 +30,27 @@
           <h4 class="modal-title">Edit Photo Details</h4>
         </div>
         <div class="modal-body">
-             <p>							<form class="form-horizontal" role="form">
+             <p>			
+                    <form class="form-horizontal" role="form">
 											<label class="control-label">Title:</label>
 											<input class="form-control"  id="modalTitle" class="form-control" value="" type="text">
 											<label class="control-label">Description:</label>
 											<input class="form-control" id="modalDesc" class="form-control" value="" type="text">
 											<label class="control-label">Cost:</label>
 											<input class="form-control"  id="modalCost" class="form-control" value="0" type="number">
-												
-											</form></p>
+		                </form>
+          </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editPhotoDetails()">Save Changes</button>
         </div>
-      </div>
+     </div>
       
     </div>
   </div>
   
-</div>
+
+ 
 	<div class="container">
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#mypics"
@@ -66,7 +70,7 @@
 									<td><div>
 											<img src="{{n.imageData.url}}"
 												class="img-fluid, img-thumbnail, myimage"
-												alt="Responsive image" id="{{'myImage-' + $index}}" ng-click="openMyDialog(n)"></img>
+                           alt="Responsive image" id="{{'myImage-' + $index}}" ng-click="openMyDialog(n)">
 											<div ng-if="selected=='mybuys'" class="desc">{{n.imageData.description}}</div>
 											<div class="desc" ng-if="selected=='mypics'">
 										
@@ -98,24 +102,23 @@
 									<td><div>
 											<img src="{{n.imageData.url}}"
 												class="img-fluid, img-thumbnail, myimage"
-												alt="Responsive image" id="{{'myImage-' + $index}}" ng-click="openMyDialog(n)">
-											<div class="desc" ng-if="selected=='mypics'" >
-											</div>
+                           alt="Responsive image" id="{{'myImage-' + $index}}" ng-click="openMyDialog(n)">
+											<div class="desc" ng-if="selected=='mypics'" ></div>
 											<div class="desc" ng-if="selected=='mybuys'" >{{n.imageData.description}}</div>
 										</div>
-										</div>
+                 
 										</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
+          
 				</div>
+        
 			</div>
+
 		</div>
 	</div>
-	
-	
-	
-	
+
 </body>
 </html>

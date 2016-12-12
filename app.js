@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -20,7 +19,6 @@ var express = require('express')
     , aws = require('./aws-upload/upload');
 
 
-//var client = redis.createClient();
 var app = express();
 
 // all environments
@@ -125,6 +123,21 @@ passport.authenticationMiddleware = authenticationMiddleware;
 //     res.redirect('/signin');
 // }
 
+function loggedIn(req, res, next) {
+    if (!req.user) {
+        res.status(404).send("Unauthorized");
+
+
+    } else {
+        if (req.user.username === req.params.id) {
+            next();
+        }
+        else {
+            res.status(401).send("Unauthorized");
+        }
+    }
+
+}
 
 // development only
 if ('development' == app.get('env')) {
@@ -134,6 +147,7 @@ if ('development' == app.get('env')) {
 app.get('/api/getPhotos/:id', photos.getPhotos);
 
 app.get('/api/getMyPhotos/:id', photos.getMyPhotos);
+
 
 app.post('/api/register', registration.register);
 
@@ -160,25 +174,28 @@ app.post('/api/editPhotoDetails', photos.editPhotoDetails);
 app.get('/api/getImageDetails/:id',photos.getImageDetails);
 
 
+
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
 
-app.get('/api/getImageDetails/:id',photos.getImageDetails);
+app.get('/api/getImageDetails/:id', photos.getImageDetails);
 
 app.get('/api/getMyBuys/:id', photos.getMyBuys);
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
 app.post('/api/uploadPics', photos.uploadPhotos);
-
+app.put('/api/putPicDetails/:id/:ratings/:username', photos.putPicDetails);
 app.get('/users', user.list);
 app.get('/api/getImageDetails/:id', photos.getImageDetails);
+app.get('/api/getPhotosByTags/:tag', photos.getPhotosByTag);
 
-app.post('/logout', function(req, res){
-  var name = req.user.username;
-  console.log("LOGGIN OUT " + req.user.username)
-  req.logout();
-  res.redirect('/');
-  req.session.notice = "You have successfully been logged out " + name + "!";
+
+app.post('/logout', function (req, res) {
+    var name = req.user.username;
+    console.log("LOGGIN OUT " + req.user.username)
+    req.logout();
+    res.redirect('/');
+    req.session.notice = "You have successfully been logged out " + name + "!";
 });
 
 app.get('/aws', aws.uploadImage);
@@ -190,6 +207,3 @@ app.get('/', routes.index);
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
-
-
-

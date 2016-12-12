@@ -13,12 +13,7 @@ angular.module('photoApp').factory('PostPhotoService',
               })
               .then(function(response) {
                   console.log(response)
-                  callback(true);
-              })
-              .catch(function(response) {
-
-                  console.log(response);
-                  callback(false);
+                  callback(response);
               });
         };
 
