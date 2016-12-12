@@ -53,17 +53,17 @@
                     for (var i = 0; i < response.data.length; i++) {
                         console.log("Iter" + i);
                         console.log(response.data[i]);
-                        vm.photos[vm.photos.length] = response.data[i].imageData;
-                        vm.photos[vm.photos.length-1]._id = response.data[i]._id;
-
+                        vm.photos[vm.photos.length] = response.data[i];
+                     //   vm.photos[vm.photos.length-1]._id = response.data[i]._id;
+                        console.log(vm.photos);
 
                     }
-
+                 	
 
                 } else {
-                    vm.photos[vm.photos.length] = response.data.imageData;
+                    vm.photos[vm.photos.length] = response.data;
                 }
-                vm.photos = removeDuplicates(vm.photos, 'url');
+               // vm.photos = removeDuplicates(vm.photos, 'url');
             })
 
 
