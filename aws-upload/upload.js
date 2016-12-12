@@ -9,6 +9,7 @@ aws.config.region = process.env.S3_REGION;
 aws.config.accessKeyId = process.env.S3_KEY;
 aws.config.secretAccessKey = process.env.S3_SECRET;
 
+
 exports.uploadImage = function(request, response) {
   var dateTime = new Date();
   var date = dateTime.toDateString().replace(/ /g,"_") + "_";
