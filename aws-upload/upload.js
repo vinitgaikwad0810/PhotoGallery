@@ -7,7 +7,7 @@ aws.config.loadFromPath('config.json');
 exports.uploadImage = function(request, response) {
   var dateTime = new Date();
   var s3 = new aws.S3();
-  var params= {Bucket: 'photobucket280', Key:request.query['filename'], ContentType:request.query['filetype'], ACL: 'public-read-write'} ;
+  var params= {Bucket: '', Key:request.query['filename'], ContentType:request.query['filetype'], ACL: 'public-read-write'} ;
   s3.getSignedUrl('putObject', params, function(error, link){
     if (error) {
 
