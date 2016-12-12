@@ -1,119 +1,118 @@
 <div class="{{PageClass}}">
-	<div class="search" style="padding-top:20px;">
+    <div id="loader" ng-hide="loadValue" class="ng-hide"></div>
+    <div class="search" style="padding-top:20px;">
 	<span>
 		<input autofocus type="text" class="search-input" id="tokenfield-typeahead" placeholder="Search pictures" />
-		<!-- <input type="text" class="token-input" autocomplete="off" placeholder="tags" id="tokenField" tabindex="0" style="min-width: 60px; width: 65.2031px;"> -->
+        <!-- <input type="text" class="token-input" autocomplete="off" placeholder="tags" id="tokenField" tabindex="0" style="min-width: 60px; width: 65.2031px;"> -->
 		<span>
 			<button class="searchbutton" type="submit" ng-click="search()">
 				<span class="glyphicon glyphicon-search"></span>
 			</button>
 		</span>
 		</span>
-	</div>
-<div class="row" style="margin-top:50px;">
-		<div class="col-md-4">
-			<table class="table table-inverse">
-				<tbody>
-					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==0">
-						<td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false">
-							<img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage"  ng-hide="zoomImage"alt="Responsive image">
-							<div class="desc" ng-show="zoomImage"><img src="{{n.url}}"
-								class="img-fluid, img-thumbnail, myimage"  ng-click="getDetails(n._id)" alt="Responsive image"> <div class="img-desc">{{n.description}}</div>
-							</div></div></td>
-					</tr>
+    </div>
+    <div class="row" style="margin-top:50px;">
+        <div class="col-sm-3">
+            <table class="table table-inverse">
+                <tbody>
+                <tr ng-repeat="n in photos track by $index" ng-if="$index%4==0">
+                    <td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false">
+                        <img src="{{n.imageData.url}}"
+                             class="img-fluid, img-thumbnail, myimage"  ng-hide="zoomImage"alt="Responsive image">
+                        <div class="desc" ng-show="zoomImage"><img src="{{n.imageData.url}}"
+                                                                   class="img-fluid, img-thumbnail, myimage"  ng-click="getDetails(n._id)" alt="Responsive image"> <div class="img-desc">{{n.imageData.description}}</div>
+                        </div></div></td>
+                </tr>
 
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-4">
-			<table class="table table-inverse">
-				<tbody>
-					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==1">
-						<td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false"><img src="{{n.imageData.url}}"
-							class="img-fluid, img-thumbnail, myimage" ng-hide="zoomImage" alt="Responsive image">	<div class="desc" ng-show="zoomImage"><img src="{{n.imageData.url}}"
-								class="img-fluid, img-thumbnail, myimage" ng-click="getDetails(n._id)" alt="Responsive image"><div class="img-desc">{{n.imageData.description}}</div></div></div>
-							</td>
-
-
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-4">
-			<table class="table table-inverse">
-				<tbody>
-					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==2">
-						<td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false"><img src="{{n.imageData.url}}"
-							class="img-fluid, img-thumbnail, myimage" ng-hide="zoomImage" alt="Responsive image">	<div class="desc" ng-show="zoomImage"><img src="{{n.imageData.url}}"
-								class="img-fluid, img-thumbnail, myimage" ng-click="getDetails(n._id)" alt="Responsive image"><div class="img-desc">{{n.imageData.description}}</div></div></div></td>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-3">
+            <table class="table table-inverse">
+                <tbody>
+                <tr ng-repeat="n in photos track by $index" ng-if="$index%4==1">
+                    <td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false"><img src="{{n.imageData.url}}"
+                                                                                                                                              class="img-fluid, img-thumbnail, myimage" ng-hide="zoomImage" alt="Responsive image">	<div class="desc" ng-show="zoomImage"><img src="{{n.imageData.url}}"
+                                                                                                                                                                                                                                                                                  class="img-fluid, img-thumbnail, myimage" ng-click="getDetails(n._id)" alt="Responsive image"><div class="img-desc">{{n.imageData.description}}</div></div></div>
+                    </td>
 
 
-					</tr>
+                </tr>
 
-				</tbody>
-			</table>
-		</div>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-3">
+            <table class="table table-inverse">
+                <tbody>
+                <tr ng-repeat="n in photos track by $index" ng-if="$index%4==2">
+                    <td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false"><img src="{{n.imageData.url}}"
+                                                                                                                                              class="img-fluid, img-thumbnail, myimage" ng-hide="zoomImage" alt="Responsive image">	<div class="desc" ng-show="zoomImage"><img src="{{n.imageData.url}}"
+                                                                                                                                                                                                                                                                                  class="img-fluid, img-thumbnail, myimage" ng-click="getDetails(n._id)" alt="Responsive image"><div class="img-desc">{{n.imageData.description}}</div></div></div></td>
+                </tr>
 
-
-		<div class="col-sm-3">
-			<table class="table table-inverse">
-				<tbody>
-					<tr ng-repeat="n in photos track by $index" ng-if="$index%4==3">
-						<td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false"><img src="{{n.url}}"
-							class="img-fluid, img-thumbnail, myimage" ng-hide="zoomImage" alt="Responsive image">	<div class="desc" ng-show="zoomImage"><img src="{{n.url}}"
-								class="img-fluid, img-thumbnail, myimage" ng-click="getDetails(n._id)" alt="Responsive image"><div class="img-desc">{{n.description}}</div></div></div></td>
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
-	</div>
+                </tbody>
+            </table>
+        </div>
 
 
-		<button type="button" id="uploadButton" class="btn btn-default btn-circle btn-lg" ng-click="fileUpload()">
-						<i class="glyphicon glyphicon-plus"></i>
-					</button>
-					<!--<input type="file" id="upload"> -->
-					<input accept="image/*" type="file" name="file" id="Upload" multiple=""/>
+        <div class="col-sm-3">
+            <table class="table table-inverse">
+                <tbody>
+                <tr ng-repeat="n in photos track by $index" ng-if="$index%4==3">
+                    <td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false"><img src="{{n.imageData.url}}"
+                                                                                                                                              class="img-fluid, img-thumbnail, myimage" ng-hide="zoomImage" alt="Responsive image">	<div class="desc" ng-show="zoomImage"><img src="{{n.imageData.url}}"
+                                                                                                                                                                                                                                                                                  class="img-fluid, img-thumbnail, myimage" ng-click="getDetails(n._id)" alt="Responsive image"><div class="img-desc">{{n.imageData.description}}</div></div></div></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 
-	  <div class="modal fade" id="previewModal" role="dialog">
-	    <div class="modal-dialog">
+    <button type="button" id="uploadButton" class="btn btn-default btn-circle btn-lg draggable" ng-click="fileUpload()">
+        <i class="glyphicon glyphicon-plus"></i>
+    </button>
+    <!--<input type="file" id="upload"> -->
+    <input accept="image/*" type="file" name="file" id="Upload" multiple=""/>
 
-	      <!-- Modal content-->
-	      <div class="modal-content">
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal" ng-click=destroy()>×</button>
-	          <h4 class="modal-title">Preview</h4>
-	        </div>
-	        <div class="modal-body">
-	          <p>Click upload to upload images to your gallery.</p>
-						<table class="table table-responsive table-sm">
-							<tbody>
-								<tr>
-									<td ng-repeat="n in files track by $index" class="tableData" >
-										<div class="col-sm-4">
-											<img id="{{'previewImage-'+ $index}}" class="img-thumbnail img-thumbnail-custom" alt="Responsive image">
-											<input type="text" class="form-control" id="{{'tokenField-' + $index}}" placeholder="tags" />
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="progress-bar progress-bar-striped active" role="progressbar" id="landingProgressBar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-					      {{dynamic}}%
-					    </div>
-				  </div>
 
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="destroy()">Close</button>
-						<button type="button" class="btn btn-primary" ng-click="uploadToS3()" id="uploadImage">Upload</button>
-	        </div>
-	      </div>
+    <div class="modal fade" id="previewModal" role="dialog">
+        <div class="modal-dialog">
 
-	    </div>
-		</div>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" ng-click=destroy()>×</button>
+                    <h4 class="modal-title">Preview</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Click upload to upload images to your gallery.</p>
+                    <table class="table table-responsive table-sm">
+                        <tbody>
+                        <tr >
+                            <th ng-repeat="n in files track by $index"  class="tableData">
+                                <div class="col-sm-3">
+                                    <img id="{{'previewImage-'+ $index}}" class="img-thumbnail img-thumbnail-custom" alt="Responsive image">
+                                    <input type="text" class="form-control" id="{{'tokenField-' + $index}}" placeholder="tags" />
+                                </div>
+                            </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" id="landingProgressBar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        {{dynamic}}%
+                    </div>
+                </div>
 
-	</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="destroy()">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="uploadToS3()" id="uploadImage">Upload</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
