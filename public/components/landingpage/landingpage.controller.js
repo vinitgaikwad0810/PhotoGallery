@@ -1,46 +1,35 @@
 (function () {
-    'use strict';
+        'use strict';
 
-    angular.module('photoApp').controller('landingPageController', Controller, ['$cookieStore', '$rootScope']);
+        angular.module('photoApp').controller('landingPageController', Controller, ['$cookieStore', '$rootScope']);
 
-    function Controller($location, $stateParams, $scope, $state, $cookieStore, $rootScope, GetPhotosService, $http, PostPhotoService, AuthenticationService) {
-        var vm = $scope;
-        vm.getDetails = getDetails;
-        vm.goToProfilePage = goToProfilePage;
-        vm.goToMyPicsPage = goToMyPicsPage;
+        function Controller($location, $stateParams, $scope, $state, $cookieStore, $rootScope, GetPhotosService, $http, PostPhotoService, AuthenticationService) {
+            var vm = $scope;
+            vm.getDetails = getDetails;
+            vm.goToProfilePage = goToProfilePage;
+            vm.goToMyPicsPage = goToMyPicsPage;
+            vm.search = search;
+            $scope.progress = "0%";
+            vm.logout = logout;
+            $("#uploadButton").draggable({cancel:false});
+            initController();
 
-        vm.search = search;
+            function initController() {
+                var id = $stateParams.id;
+                getPhotos(id)
+                // reset login status
+                // AuthenticationService.Logout();
+                $('#tokenfield-typeahead').tokenfield();
+                $('.form-control').css('display','inline-block')
+            }
 
+            function logout() {
+                AuthenticationService.ClearCredentials();
+                $http.post('/logout');
+                $state.transitionTo('home');
+            }
 
-        $scope.progress = "0%";
-        vm.logout = logout;
-        initController();
-
-        function initController() {
-            var id = $stateParams.id;
-
-
-            getPhotos(id)
-
-            // reset login status
-            // AuthenticationService.Logout();
-
-            $('#tokenfield-typeahead').tokenfield();
-            $('.form-control').css('display', 'inline-block')
-        }
-
-
-        function logout() {
-            AuthenticationService.ClearCredentials();
-
-            $http.post('/logout');
-
-            $state.transitionTo('home');
-
-        }
-
-
-        function search() {
+            function search() {
 
             var tokenlist = [$('#tokenfield-typeahead').tokenfield('getTokensList')];
             console.log("tokenlist");
@@ -55,8 +44,10 @@
                 if (true) {
                     for (var i = 0; i < response.data.length; i++) {
                         console.log("Iter" + i);
-                        console.log(response.data[i].imageData);
+                        console.log(response.data[i]);
                         vm.photos[vm.photos.length] = response.data[i].imageData;
+                        vm.photos[vm.photos.length-1]._id = response.data[i]._id;
+
                     }
 
 
@@ -68,7 +59,6 @@
 
 
         }
-
 
 
         function removeDuplicates(originalArray, objKey) {
@@ -84,10 +74,10 @@
                     values.push(value);
                 }
             }
-
             return trimmedArray;
 
         }
+
 
 
         function getPhotos(id) {
@@ -99,6 +89,7 @@
                     // $location.path('/');
                     vm.photos = result.data;
                     //$(".loader").fadeOut("slow");
+                    $scope.loadValue = true;
                 } else {
                     $location.path('/');
 
@@ -187,14 +178,15 @@
                                         console.log("not inserted");
                                     }
                                 });
+
+                                if ($scope.dynamic == 100) {
+                                    $(".modal").modal('hide');
+                                }
                             } else {
                                 alert('Could not upload file.');
                             }
                         }
                     };
-                    if ($scope.dynamic == 100) {
-                        $(".modal").modal('hide');
-                    }
                     console.log("file" + file);
                     xhr.send(file);
                 }, function (response) {
