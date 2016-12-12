@@ -43,6 +43,7 @@
 		
 				GetPhotosService.getMyBuys(id, function(result) {
 					if (result) {
+						console.log("my buy");
 						console.log(result.data);
 						// $location.path('/');
 						vm.mybuys = result.data;

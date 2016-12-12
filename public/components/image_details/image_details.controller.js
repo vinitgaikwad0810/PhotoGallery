@@ -12,6 +12,7 @@
 
         function initController() {
             var id = $stateParams.id;
+            console.log(id);
             var ratings = $stateParams.ratings;
             getImageDetails(id);
             putPicDetails(id, ratings);

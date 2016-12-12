@@ -168,8 +168,6 @@ app.get('/renderError', function (req, res) {
 });
 
 
-app.get('/api/getProfileDetails/:id', user.getProfileDetails);
-app.post('/api/editProfileDetails', user.editProfileDetails);
 app.post('/api/editPhotoDetails', photos.editPhotoDetails);
 app.get('/api/getImageDetails/:id',photos.getImageDetails);
 
@@ -177,16 +175,11 @@ app.get('/api/getImageDetails/:id',photos.getImageDetails);
 
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
-
-app.get('/api/getImageDetails/:id', photos.getImageDetails);
-
 app.get('/api/getMyBuys/:id', photos.getMyBuys);
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
-app.post('/api/editProfileDetails', user.editProfileDetails);
 app.post('/api/uploadPics', photos.uploadPhotos);
-app.put('/api/putPicDetails/:id/:ratings/:username', photos.putPicDetails);
+app.put('/api/putPicDetails', photos.putPicDetails);
 app.get('/users', user.list);
-app.get('/api/getImageDetails/:id', photos.getImageDetails);
 app.get('/api/getPhotosByTags/:tag', photos.getPhotosByTag);
 
 

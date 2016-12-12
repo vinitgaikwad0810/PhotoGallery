@@ -119,8 +119,9 @@
                         	vm.photos[vm.photos.length]=result.data[i].imageData;
                         	console.log(vm.photos);
                         	//if (typeof vm.photos[vm.photos.length-1] != undefined)
-                        		//vm.photos[vm.photos.length-1]._id=result.data[i]._id;
+                        	vm.photos[vm.photos.length-1]._id=result.data[i]._id;
                         }
+                        $scope.loadValue = true;
                      
                     } else {
                         $location.path('/');
@@ -140,7 +141,7 @@
 
 
         function getDetails(id) {
-            //console.log("Inside getDetails" + id);
+            console.log("Inside getDetails" + id);
             $state.transitionTo('image_details', {id: id});
 
         };
