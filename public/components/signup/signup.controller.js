@@ -5,10 +5,10 @@
         .module('photoApp')
         .controller('signupController', Controller);
 
-    function Controller($scope, $location, RegistrationService) {
-        var vm =  $scope;
+    function Controller($scope, $location, $state, RegistrationService, AuthenticationService) {
+        var vm = $scope;
 
-         vm.signup = signup;
+        vm.signup = signup;
 
         initController();
 
@@ -18,20 +18,25 @@
         };
 
         function signup() {
-            // vm.loading = true;
-            // AuthenticationService.Login(vm.username, vm.password, function (result) {
-            //     if (result === true) {
-            //         $location.path('/');
-            //     } else {
-            //         vm.error = 'Username or password is incorrect';
-            //         vm.loading = false;
-            //     }
-            // });
-
-            RegistrationService.register(vm.name,vm.city, vm.username, vm.email, vm.password, function(result){
 
 
-             console.log("Vinit!!!!");
+            RegistrationService.register(vm.name, vm.city, vm.username, vm.email, vm.password, function (result) {
+
+
+                AuthenticationService.Login(vm.username, vm.password, function (success) {
+                    if (success === true) {
+                        //console.log("Donita"+vm.username);
+                        //  $location.path('/');
+                        AuthenticationService.SetCredentials(vm.username, vm.password);
+
+                        $state.transitionTo('landingpage', {id: vm.username});
+                    } else {
+                        vm.serverMessage = 'Username or password is incorrect';
+                        console.log(vm.serverMessage);
+                        vm.loading = false;
+                    }
+                });
+
             });
         };
     }

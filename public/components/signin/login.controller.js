@@ -5,7 +5,7 @@
         .module('photoApp')
         .controller('Login.IndexController', Controller);
  
-    function Controller($scope, $location,$state, AuthenticationService) {
+    function Controller($scope, $location, $state, AuthenticationService) {
         var vm = $scope;
  
         vm.login = login;
