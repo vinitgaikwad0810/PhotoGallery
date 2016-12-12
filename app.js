@@ -127,8 +127,15 @@ passport.authenticationMiddleware = authenticationMiddleware;
 function loggedIn(req, res, next) {
     if (!req.user) {
         res.status(404).send("Unauthorized");
-    }else{
-        next();
+
+
+    } else {
+        if (req.user.username === req.params.id) {
+            next();
+        }
+        else {
+            res.status(401).send("Unauthorized");
+        }
     }
 
 }
@@ -174,7 +181,7 @@ app.get('/api/getMyBuys/:id', photos.getMyBuys);
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
 app.post('/api/uploadPics', photos.uploadPhotos);
-app.put('/api/putPicDetails/:id/:ratings/:username',photos.putPicDetails);
+app.put('/api/putPicDetails/:id/:ratings/:username', photos.putPicDetails);
 app.get('/users', user.list);
 app.get('/api/getImageDetails/:id', photos.getImageDetails);
 app.get('/api/getPhotosByTags/:tag', photos.getPhotosByTag);
