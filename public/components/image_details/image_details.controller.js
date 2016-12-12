@@ -12,8 +12,8 @@
 
         function initController() {
             var id = $stateParams.id;
+            console.log(id);
             var ratings = $stateParams.ratings;
-
             getImageDetails(id);
             putPicDetails(id, ratings);
             // reset login status
@@ -34,7 +34,6 @@
                 });
             }, 3000)
         };
-
         function getImageDetails(id) {
             console.log("controller Params" + id);
             setTimeout(function () {

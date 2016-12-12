@@ -11,12 +11,20 @@
             vm.search = search;
             $scope.progress = "0%";
             vm.logout = logout;
+            vm.goToLandingPage=goToLandingPage;
+
             $("#uploadButton").draggable({cancel:false});
+
             initController();
 
             function initController() {
                 var id = $stateParams.id;
-                getPhotos(id)
+
+                vm.photos=[];
+                
+                    getPhotos(id);
+               
+
                 // reset login status
                 // AuthenticationService.Logout();
                 $('#tokenfield-typeahead').tokenfield();
@@ -32,22 +40,22 @@
 
             function search() {
 
-            var tokenlist = [$('#tokenfield-typeahead').tokenfield('getTokensList')];
+                   var tokenlist = [$('#tokenfield-typeahead').tokenfield('getTokensList')];
             console.log("tokenlist");
             console.log(tokenlist);
             var tags = tokenlist[0].split(",");
             vm.photos = [];
             GetPhotosService.getPhotosByTags(tags, function (response) {
-
+              
                 console.log("Search Result");
                 console.log(response);
-
-                if (true) {
+                              if (true) {
                     for (var i = 0; i < response.data.length; i++) {
                         console.log("Iter" + i);
                         console.log(response.data[i]);
                         vm.photos[vm.photos.length] = response.data[i].imageData;
                         vm.photos[vm.photos.length-1]._id = response.data[i]._id;
+
 
                     }
 
@@ -60,6 +68,21 @@
 
 
         }
+
+
+
+      
+            function goToLandingPage() {
+                var id = $cookieStore.get('globals').currentUser.username;
+                $state.transitionTo('landingpage', {id: id});
+
+            };
+            function goToProfilePage() {
+                var id = $cookieStore.get('globals').currentUser.username;
+                $state.transitionTo('profilepage', {id: id});
+
+              
+            };
 
 
         function removeDuplicates(originalArray, objKey) {
@@ -81,28 +104,35 @@
         }
 
 
-        function getPhotos(id) {
-            console.log("State Params" + id);
+           function getPhotos(id) {
+                console.log("State Params" + id);
 
-            GetPhotosService.getPhotos(id, function (result) {
-                if (result) {
-                    console.log(result.data);
-                    // $location.path('/');
-                    vm.photos = result.data;
-                    //$(".loader").fadeOut("slow");
-                    $scope.loadValue = true;
-                } else {
-                    $location.path('/');
+                GetPhotosService.getPhotos(id, function (result) {
+                    if (result) {
+                        console.log(result.data);
+                        var length=result.data.length;
+                     
+                        console.log(vm.photos);
+                        vm.photos = [];
+                        for(var i=0;i<length;i++){
+                        
+                        	vm.photos[vm.photos.length]=result.data[i];
+                        	console.log("vm.photos");
+                        	console.log(vm.photos);
+                        	//if (typeof vm.photos[vm.photos.length-1] != undefined)
+                        	vm.photos[vm.photos.length-1]._id=result.data[i]._id;
+                        }
+                        $scope.loadValue = true;
+                     
+                    } else {
+                        $location.path('/');
 
-                }
-            });
-        };
+                    }
+                });
+            };
 
-        function goToProfilePage() {
-            var id = $cookieStore.get('globals').currentUser.username;
-            $state.transitionTo('profilepage', {id: id});
 
-        };
+   
 
         function goToMyPicsPage() {
             var id = $cookieStore.get('globals').currentUser.username;
@@ -112,7 +142,7 @@
 
 
         function getDetails(id) {
-            //console.log("Inside getDetails" + id);
+            console.log("Inside getDetails" + id);
             $state.transitionTo('image_details', {id: id});
 
         };

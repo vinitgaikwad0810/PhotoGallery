@@ -49,6 +49,7 @@ photoApp.config(function ($stateProvider, $urlRouterProvider) {
                 },
                 'footer': {
                     templateUrl: '/shared/footer/footer.html'
+          
                 }
             }
         }).state(

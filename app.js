@@ -20,7 +20,6 @@ var express = require('express')
     , aws = require('./aws-upload/upload');
 
 
-// var client = redis.createClient();
 var app = express();
 
 // all environments
@@ -148,6 +147,8 @@ if ('development' == app.get('env')) {
 
 app.get('/api/getPhotos/:id', photos.getPhotos);
 
+app.get('/api/getMyPhotos/:id', photos.getMyPhotos);
+
 
 
 app.post('/api/register', registration.register);
@@ -169,23 +170,16 @@ app.get('/renderError', function (req, res) {
 });
 
 
-app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
 app.get('/api/getImageDetails/:id',photos.getImageDetails);
+app.post('/api/editPhotoDetails', photos.editPhotoDetails);
 
 
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
-app.post('/api/editProfileDetails', user.editProfileDetails);
-
-app.get('/api/getImageDetails/:id',photos.getImageDetails);
-
 app.get('/api/getMyBuys/:id', photos.getMyBuys);
-app.get('/api/getProfileDetails/:id', user.getProfileDetails);
-app.post('/api/editProfileDetails', user.editProfileDetails);
 app.post('/api/uploadPics', photos.uploadPhotos);
-app.put('/api/putPicDetails',photos.putPicDetails);
+app.put('/api/putPicDetails', photos.putPicDetails);
 app.get('/users', user.list);
-app.get('/api/getImageDetails/:id', photos.getImageDetails);
 app.get('/api/getPhotosByTags/:tag', photos.getPhotosByTag);
 
 

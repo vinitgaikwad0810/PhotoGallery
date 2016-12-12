@@ -1,13 +1,21 @@
+<script>
+$(document).ready(function(){
+	$('a').click(function (e) {
+	      e.preventDefault();
+	  });
+});
+</script>
+
 <div>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Photo Stack</a>
+				<a class="navbar-brand" href ng-click="goToLandingPage()">Photo Stack</a>
 			</div>
 			<ul class="nav navbar-right navbar-nav">
 				<li><a  href ng-click="goToMyPicsPage()">My Pics</a></li>
 				<li><a  href  ng-click="goToProfilePage()">Profile</a></li>
-				<li><a href="#!/view2">Upload</a></li>
+		
 				<li><a href ng-click="logout()">Logout</a></li>
 				<li></li>
 			</ul>
