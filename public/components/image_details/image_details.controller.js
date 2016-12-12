@@ -1,5 +1,6 @@
-(function() {
-	'use strict';
+(function () {
+    'use strict';
+
 
 	angular.module('photoApp').controller('detailsController', Controller, ['$cookieStore', '$rootScope']);
 
@@ -35,11 +36,11 @@ var username = $cookieStore.get('globals').currentUser.username;
 		};
 
 		function getImageDetails(id) {
-			// console.log("controller Params" + id);
+			console.log("controller Params" + id);
 			setTimeout(function() {
 				GetImageDetailsService.getImageDetails(id, function(result) {
 					if (result) {
-						console.log(result.data);
+						console.log("Inside image controller"+result.data);
 						vm.photoDetails = result.data;
 					} else {
 
@@ -47,5 +48,5 @@ var username = $cookieStore.get('globals').currentUser.username;
 				});
 			}, 3000);
 		};
-};
+}
 	})();
