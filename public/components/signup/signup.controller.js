@@ -1,22 +1,22 @@
 (function () {
     'use strict';
- 
+
     angular
         .module('photoApp')
         .controller('signupController', Controller);
- 
+
     function Controller($scope, $location, RegistrationService) {
         var vm =  $scope;
- 
+
          vm.signup = signup;
- 
+
         initController();
- 
+
         function initController() {
             // reset login status
             // AuthenticationService.Logout();
         };
- 
+
         function signup() {
             // vm.loading = true;
             // AuthenticationService.Login(vm.username, vm.password, function (result) {

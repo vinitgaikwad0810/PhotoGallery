@@ -1,18 +1,20 @@
-<!-- <br><br><br> <p>Sample Test</p>{{photoDetails.description}} -->
+
 <script>
-    $(document).ready(function () {
-        $('a').click(function (e) {
-            e.preventDefault();
-        });
-    });
+$(document).ready(function(){
+	$('a').click(function (e) {
+	      e.preventDefault();
+	  });
+});
 </script>
-<br>
+    <!-- <br><br><br> <p>Sample Test</p>{{photoDetails.description}} -->
+ <br>
 
 <div class="row total_div">
     <div class=" col-md-5 i_detail">
         <div class="i_title"><h1>{{photoDetails.photo_name}}</h1>
             <div><img src="{{photoDetails.url}}" alt="sorry no image" class="samp-img">
             </div>
+
         </div>
     </div>
 
@@ -23,6 +25,7 @@
              <li class="ftl-tab col-8 tab-flat tab-active">Details</li>
              <li class="ftl-tab col-8 tab-flat tab-active">Price</li>
               -->
+
         <div id="info" class="info">
             <ul class="nav nav-pills">
                 <li class="active">
@@ -43,18 +46,20 @@
                         <div class="owner">Owner: {{photoDetails.owner}}</div>
                         <br><br>
                         Tags: <span class="tags" ng-repeat="t in photoDetails.tag">
+
           <button class="btn" type="button">{{t}}<i class="glyphicon gyphicon-remove"></i></button>
         </span>
 
                     </div>
                 </div>
 
-                <div class="tab-pane" id="3b">
-                    <div class="c-content">
-                        <h4>Price: <span class="set"> ${{photoDetails.cost}} </span></h4><br>
-                        <button class="btn btn-primary buy" type="button" onClick="#">Buy</button>
-                    </div>
-                </div>
+        <div class="tab-pane" id="3b">
+          <div class="c-content">
+          <h4>Price: <span class="set"> ${{photoDetails.cost}} </span></h4><br>
+          <button class="btn btn-primary buy" type="button" ng-click="putPicDetails(photoDetails._id,photoDetails.ratings,photoDetails.bought_by)">Buy</button>
+        </div>
+				</div>
+
 
             </div>
         </div>
