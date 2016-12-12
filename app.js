@@ -1,3 +1,4 @@
+
 /**
  * Module dependencies.
  */
@@ -148,6 +149,7 @@ if ('development' == app.get('env')) {
 app.get('/api/getPhotos/:id', photos.getPhotos);
 
 
+
 app.post('/api/register', registration.register);
 
 
@@ -169,30 +171,30 @@ app.get('/renderError', function (req, res) {
 
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
-app.get('/api/getImageDetails/:id', photos.getImageDetails);
+app.get('/api/getImageDetails/:id',photos.getImageDetails);
 
 
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
 
-app.get('/api/getImageDetails/:id', photos.getImageDetails);
+app.get('/api/getImageDetails/:id',photos.getImageDetails);
 
 app.get('/api/getMyBuys/:id', photos.getMyBuys);
 app.get('/api/getProfileDetails/:id', user.getProfileDetails);
 app.post('/api/editProfileDetails', user.editProfileDetails);
 app.post('/api/uploadPics', photos.uploadPhotos);
-app.put('/api/putPicDetails/:id/:ratings/:username', photos.putPicDetails);
+app.put('/api/putPicDetails',photos.putPicDetails);
 app.get('/users', user.list);
 app.get('/api/getImageDetails/:id', photos.getImageDetails);
 app.get('/api/getPhotosByTags/:tag', photos.getPhotosByTag);
 
 
-app.post('/logout', function (req, res) {
-    var name = req.user.username;
-    console.log("LOGGIN OUT " + req.user.username)
-    req.logout();
-    res.redirect('/');
-    req.session.notice = "You have successfully been logged out " + name + "!";
+app.post('/logout', function(req, res){
+  var name = req.user.username;
+  console.log("LOGGIN OUT " + req.user.username)
+  req.logout();
+  res.redirect('/');
+  req.session.notice = "You have successfully been logged out " + name + "!";
 });
 
 app.get('/aws', aws.uploadImage);

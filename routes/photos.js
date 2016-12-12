@@ -97,20 +97,25 @@ exports.getImageDetails = function (req, res) {
 /*Post bought picture's id and rating*/
 exports.putPicDetails= function(req, res){
 
-	var id=req.params.id;
-	var ratings=req.params.ratings;
-	var username=req.params.username;
-	// console.log("backendid:"+id);
+	var id=req.body.id;
+	var ratings=req.body.ratings;
+	var username=req.body.username;
+	 console.log("backend:"+id+ratings+username);
   var ObjectId = require('mongodb').ObjectID;
 	mongo.connect(mongoURL,function(){
 		var coll=mongo.collection('photo');
 		coll.update({
 		    "_id": ObjectId(id)},
-				{ $set: { $inc:{	"ratings":1
-				   }    },
-						"bought_buy":[username]},
-						{upsert: true, multi: true
-						},function(err, photos){
+          {$set:
+					 {	"imageData.ratings":1
+				    }
+					 },
+						{ $push:{"imageData.bought_buy":username
+					}  }
+				,
+						 { upsert: true,multi:true
+						 }
+						,function(err, photos){
 			if (photos) {
 				json_responses.status_code=200;
 				json_responses.data=photos;
