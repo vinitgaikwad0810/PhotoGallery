@@ -1,4 +1,5 @@
 <div class="{{PageClass}}">
+	<div id="loader" ng-hide="loadValue" class="ng-hide"></div>
 	<div class="search" style="padding-top:20px;">
 	<span>
 		<input autofocus type="text" class="search-input" id="tokenfield-typeahead" placeholder="Search pictures" />
@@ -11,28 +12,28 @@
 		</span>
 	</div>
 <div class="row" style="margin-top:50px;">
-		<div class="col-md-4">
+		<div class="col-sm-3">
 			<table class="table table-inverse">
 				<tbody>
-					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==0">
+					<tr ng-repeat="n in photos track by $index" ng-if="$index%4==0">
 						<td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false">
 							<img src="{{n.url}}"
 							class="img-fluid, img-thumbnail, myimage"  ng-hide="zoomImage"alt="Responsive image">
 							<div class="desc" ng-show="zoomImage"><img src="{{n.url}}"
-								class="img-fluid, img-thumbnail, myimage"  ng-click="getDetails(n.photo_id)" alt="Responsive image"> <div class="img-desc">{{n.description}}</div>
+								class="img-fluid, img-thumbnail, myimage"  ng-click="getDetails(n._id)" alt="Responsive image"> <div class="img-desc">{{n.description}}</div>
 							</div></div></td>
 					</tr>
 
 				</tbody>
 			</table>
 		</div>
-		<div class="col-md-4">
+		<div class="col-sm-3">
 			<table class="table table-inverse">
 				<tbody>
-					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==1">
+					<tr ng-repeat="n in photos track by $index" ng-if="$index%4==1">
 						<td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false"><img src="{{n.url}}"
 							class="img-fluid, img-thumbnail, myimage" ng-hide="zoomImage" alt="Responsive image">	<div class="desc" ng-show="zoomImage"><img src="{{n.url}}"
-								class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="img-desc">{{n.description}}</div></div></div>
+								class="img-fluid, img-thumbnail, myimage" ng-click="getDetails(n._id)" alt="Responsive image"><div class="img-desc">{{n.description}}</div></div></div>
 							</td>
 
 
@@ -41,25 +42,36 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="col-md-4">
+		<div class="col-sm-3">
 			<table class="table table-inverse">
 				<tbody>
-					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==2">
+					<tr ng-repeat="n in photos track by $index" ng-if="$index%4==2">
 						<td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false"><img src="{{n.url}}"
 							class="img-fluid, img-thumbnail, myimage" ng-hide="zoomImage" alt="Responsive image">	<div class="desc" ng-show="zoomImage"><img src="{{n.url}}"
-								class="img-fluid, img-thumbnail, myimage" alt="Responsive image"><div class="img-desc">{{n.description}}</div></div></div></td>
-
-
+								class="img-fluid, img-thumbnail, myimage" ng-click="getDetails(n._id)" alt="Responsive image"><div class="img-desc">{{n.description}}</div></div></div></td>
 					</tr>
 
 				</tbody>
 			</table>
 		</div>
 
+
+		<div class="col-sm-3">
+			<table class="table table-inverse">
+				<tbody>
+					<tr ng-repeat="n in photos track by $index" ng-if="$index%4==3">
+						<td><div class="small-image" ng-mouseover="zoomImage=true" ng-mouseleave="zoomImage=false" ng-init="zoomImage=false"><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" ng-hide="zoomImage" alt="Responsive image">	<div class="desc" ng-show="zoomImage"><img src="{{n.url}}"
+								class="img-fluid, img-thumbnail, myimage" ng-click="getDetails(n._id)" alt="Responsive image"><div class="img-desc">{{n.description}}</div></div></div></td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 
-		<button type="button" id="uploadButton" class="btn btn-default btn-circle btn-lg" ng-click="fileUpload()">
+		<button type="button" id="uploadButton" class="btn btn-default btn-circle btn-lg draggable" ng-click="fileUpload()">
 						<i class="glyphicon glyphicon-plus"></i>
 					</button>
 					<!--<input type="file" id="upload"> -->
