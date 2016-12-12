@@ -91,8 +91,8 @@
 	          <p>Click upload to upload images to your gallery.</p>
 						<table class="table table-responsive table-sm">
 							<tbody>
-								<tr ng-repeat="n in files track by $index" >
-									<th  class="tableData">
+								<tr >
+									<th ng-repeat="n in files track by $index"  class="tableData">
 										<div class="col-sm-3">
 											<img id="{{'previewImage-'+ $index}}" class="img-thumbnail img-thumbnail-custom" alt="Responsive image">
 											<input type="text" class="form-control" id="{{'tokenField-' + $index}}" placeholder="tags" />
