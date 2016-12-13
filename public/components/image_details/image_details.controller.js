@@ -15,7 +15,7 @@
             console.log(id);
             var ratings = $stateParams.ratings;
             getImageDetails(id);
-            putPicDetails(id, ratings);
+           // putPicDetails(id, ratings);
             // reset login status
             // AuthenticationService.Logout();
         }

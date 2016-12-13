@@ -1,13 +1,12 @@
-
 <script>
-$(document).ready(function(){
-	$('a').click(function (e) {
-	      e.preventDefault();
-	  });
-});
+    $(document).ready(function () {
+        $('a').click(function (e) {
+            e.preventDefault();
+        });
+    });
 </script>
 
- <br>
+<br>
 
 <div class="row total_div">
     <div class=" col-md-5 i_detail">
@@ -46,19 +45,21 @@ $(document).ready(function(){
                     </div>
                 </div>
 
-        <div class="tab-pane" id="3b">
-          <div class="c-content">
-          <h4>Price: <span class="set"> ${{photoDetails.imageData.cost}} </span></h4><br>
-          <button class="btn btn-primary buy" type="button" ng-click="putPicDetails(photoDetails._id,photoDetails.imageData.ratings,photoDetails.imageData.bought_by)">Buy</button>
-        </div>
-				</div>
+                <div class="tab-pane" id="3b">
+                    <div class="c-content">
+                        <h4>Price: <span class="set"> ${{photoDetails.imageData.cost}} </span></h4><br>
+                        <button class="btn btn-primary buy" type="button"
+                                ng-click="putPicDetails(photoDetails._id,photoDetails.imageData.ratings,photoDetails.imageData.bought_by)">
+                            Buy
+                        </button>
+                    </div>
+                </div>
 
 
             </div>
         </div>
 
 
-        </ul>
     </div>
 </div>
-</div>
+

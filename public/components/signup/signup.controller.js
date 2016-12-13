@@ -15,6 +15,7 @@
         function initController() {
             // reset login status
             // AuthenticationService.Logout();
+            //$('footer').remove();
         };
 
         function signup() {
