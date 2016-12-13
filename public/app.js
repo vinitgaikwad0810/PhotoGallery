@@ -32,7 +32,7 @@ photoApp.config(function ($stateProvider, $urlRouterProvider) {
                 controller: 'signupController'
             },
             'footer': {
-                templateUrl: '/shared/footer/footer.html'
+                templateUrl: '/components/signup/footer.signup.html'
             }
         }
     }).state(
