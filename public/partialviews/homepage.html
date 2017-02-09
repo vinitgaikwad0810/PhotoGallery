@@ -1,0 +1,40 @@
+
+<div class="row">
+		<div class="col-md-4">
+			<table class="table table-inverse">
+				<tbody>
+					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==0" >
+						<td><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4">
+			<table class="table table-inverse">
+				<tbody>
+					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==1">
+						<td><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4">
+			<table class="table table-inverse">
+				<tbody>
+					<tr ng-repeat="n in photos track by $index" ng-if="$index%3==2">
+						<td><img src="{{n.url}}"
+							class="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+	</div>

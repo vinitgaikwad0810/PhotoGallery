@@ -1,0 +1,591 @@
+[33mcommit af2001694be20930c77b0acbaf5626b47ec96fba[m
+Author: donitaalmeida <donita.almeida@sjsu.edu>
+Date:   Thu Dec 8 16:03:23 2016 -0800
+
+    landingpage
+
+[1mdiff --git a/public/app.js b/public/app.js[m
+[1mindex 8c42545..abad9f8 100644[m
+[1m--- a/public/app.js[m
+[1m+++ b/public/app.js[m
+[36m@@ -93,7 +93,7 @@[m [mphotoApp[m
+ 					.state([m
+ 							'landingpage',[m
+ 							{[m
+[31m-								url : '/landingpage',[m
+[32m+[m								[32murl : '/landingpage/:id',[m
+ 								views : {[m
+ [m
+ 									'header' : {[m
+[1mdiff --git a/public/components/landingpage/landingpage.controller.js b/public/components/landingpage/landingpage.controller.js[m
+[1mindex a74f3e6..9fe131b 100644[m
+[1m--- a/public/components/landingpage/landingpage.controller.js[m
+[1m+++ b/public/components/landingpage/landingpage.controller.js[m
+[36m@@ -5,7 +5,7 @@[m
+         .module('photoApp')[m
+         .controller('landingPageController', Controller);[m
+  [m
+[31m-    function Controller($location, AuthenticationService) {[m
+[32m+[m[32m    function Controller($location,$stateParams, AuthenticationService) {[m
+         var vm = this;[m
+  [m
+         vm.getPhotos = getPhotos;[m
+[36m@@ -13,7 +13,7 @@[m
+         initController();[m
+  [m
+         function initController() {[m
+[31m-        	console.log('Inside landing page');[m
+[32m+[m[41m        [m	[32mconsole.log('Inside landing page'+$stateParams.id);[m
+             // reset login status[m
+             // AuthenticationService.Logout();[m
+         };[m
+[1mdiff --git a/public/components/signin/login.controller.js b/public/components/signin/login.controller.js[m
+[1mindex 961d149..6bb2762 100644[m
+[1m--- a/public/components/signin/login.controller.js[m
+[1m+++ b/public/components/signin/login.controller.js[m
+[36m@@ -5,7 +5,7 @@[m
+         .module('photoApp')[m
+         .controller('Login.IndexController', Controller);[m
+  [m
+[31m-    function Controller($scope, $location, AuthenticationService) {[m
+[32m+[m[32m    function Controller($scope, $location,$state, AuthenticationService) {[m
+         var vm = $scope;[m
+  [m
+         vm.login = login;[m
+[36m@@ -18,13 +18,14 @@[m
+         };[m
+  [m
+         function login() {[m
+[32m+[m[41m        [m	[32mconsole.log($state);[m
+             vm.loading = true;[m
+          //   console.log("Donita"+vm.username);[m
+             AuthenticationService.Login(vm.username, vm.password, function (result) {[m
+                 if (result === true) {[m
+                 	//console.log("Donita"+vm.username);[m
+                   //  $location.path('/');[m
+[31m-                	$state.transitionTo('landingpage');[m
+[32m+[m[41m                [m	[32m$state.transitionTo('landingpage',{id:"1"});[m
+                 } else {[m
+                     vm.error = 'Username or password is incorrect';[m
+                     console.log(vm.error);[m
+[1mdiff --git a/views/index.ejs b/views/index.ejs[m
+[1mindex 87768d2..a63b50d 100644[m
+[1m--- a/views/index.ejs[m
+[1m+++ b/views/index.ejs[m
+[36m@@ -20,6 +20,7 @@[m
+ <script type="text/javascript" src="services/authenticationService.js"></script>[m
+ <script type="text/javascript" src="services/registrationService.js"></script> [m
+ <script src="http://code.angularjs.org/1.2.6/angular.js"></script>[m
+[32m+[m[32m<script type="text/javascript" src="components/landingpage/landingpage.controller.js"></script>[m
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script> -->[m
+   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>[m
+ </head>[m
+
+[33mcommit 92b6873c50f453c4bf5de1d58dd9a96390f93afa[m
+Author: donitaalmeida <donita.almeida@sjsu.edu>
+Date:   Thu Dec 8 15:23:30 2016 -0800
+
+    landingpage
+
+[1mdiff --git a/npm-debug.log b/npm-debug.log[m
+[1mindex 2ce0b24..ee226bc 100644[m
+[1m--- a/npm-debug.log[m
+[1m+++ b/npm-debug.log[m
+[36m@@ -1,45 +1,42 @@[m
+ 0 info it worked if it ends with ok[m
+[31m-1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ][m
+[31m-2 info using npm@3.10.8[m
+[31m-3 info using node@v6.9.1[m
+[32m+[m[32m1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',[m
+[32m+[m[32m1 verbose cli   'C:\\Users\\donita\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',[m
+[32m+[m[32m1 verbose cli   'start' ][m
+[32m+[m[32m2 info using npm@2.15.5[m
+[32m+[m[32m3 info using node@v4.4.5[m
+ 4 verbose run-script [ 'prestart', 'start', 'poststart' ][m
+[31m-5 info lifecycle PhotoGallery@0.0.1~prestart: PhotoGallery@0.0.1[m
+[31m-6 silly lifecycle PhotoGallery@0.0.1~prestart: no script for prestart, continuing[m
+[31m-7 info lifecycle PhotoGallery@0.0.1~start: PhotoGallery@0.0.1[m
+[31m-8 verbose lifecycle PhotoGallery@0.0.1~start: unsafe-perm in lifecycle true[m
+[31m-9 verbose lifecycle PhotoGallery@0.0.1~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/vinitanilgaikwad/cmpe280/PhotoGallery/node_modules/.bin:/usr/local/rvm/gems/ruby-2.3.0/bin:/usr/local/rvm/gems/ruby-2.3.0@global/bin:/usr/local/rvm/rubies/ruby-2.3.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/rvm/bin[m
+[31m-10 verbose lifecycle PhotoGallery@0.0.1~start: CWD: /Users/vinitanilgaikwad/cmpe280/PhotoGallery[m
+[31m-11 silly lifecycle PhotoGallery@0.0.1~start: Args: [ '-c', 'node app.js' ][m
+[31m-12 silly lifecycle PhotoGallery@0.0.1~start: Returned: code: 1  signal: null[m
+[31m-13 info lifecycle PhotoGallery@0.0.1~start: Failed to exec start script[m
+[31m-14 verbose stack Error: PhotoGallery@0.0.1 start: `node app.js`[m
+[31m-14 verbose stack Exit status 1[m
+[31m-14 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:255:16)[m
+[31m-14 verbose stack     at emitTwo (events.js:106:13)[m
+[31m-14 verbose stack     at EventEmitter.emit (events.js:191:7)[m
+[31m-14 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:40:14)[m
+[31m-14 verbose stack     at emitTwo (events.js:106:13)[m
+[31m-14 verbose stack     at ChildProcess.emit (events.js:191:7)[m
+[31m-14 verbose stack     at maybeClose (internal/child_process.js:877:16)[m
+[31m-14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)[m
+[31m-15 verbose pkgid PhotoGallery@0.0.1[m
+[31m-16 verbose cwd /Users/vinitanilgaikwad/cmpe280/PhotoGallery[m
+[31m-17 error Darwin 15.6.0[m
+[31m-18 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"[m
+[31m-19 error node v6.9.1[m
+[31m-20 error npm  v3.10.8[m
+[31m-21 error code ELIFECYCLE[m
+[31m-22 error PhotoGallery@0.0.1 start: `node app.js`[m
+[31m-22 error Exit status 1[m
+[31m-23 error Failed at the PhotoGallery@0.0.1 start script 'node app.js'.[m
+[31m-23 error Make sure you have the latest version of node.js and npm installed.[m
+[31m-23 error If you do, this is most likely a problem with the PhotoGallery package,[m
+[31m-23 error not with npm itself.[m
+[31m-23 error Tell the author that this fails on your system:[m
+[31m-23 error     node app.js[m
+[31m-23 error You can get information on how to open an issue for this project with:[m
+[31m-23 error     npm bugs PhotoGallery[m
+[31m-23 error Or if that isn't available, you can get their info via:[m
+[31m-23 error     npm owner ls PhotoGallery[m
+[31m-23 error There is likely additional logging output above.[m
+[31m-24 verbose exit [ 1, true ][m
+[32m+[m[32m5 info prestart PhotoGallery@0.0.1[m
+[32m+[m[32m6 info start PhotoGallery@0.0.1[m
+[32m+[m[32m7 verbose unsafe-perm in lifecycle true[m
+[32m+[m[32m8 info PhotoGallery@0.0.1 Failed to exec start script[m
+[32m+[m[32m9 verbose stack Error: PhotoGallery@0.0.1 start: `node app.js`[m
+[32m+[m[32m9 verbose stack Exit status 1[m
+[32m+[m[32m9 verbose stack     at EventEmitter.<anonymous> (C:\Users\donita\AppData\Roaming\npm\node_modules\npm\lib\utils\lifecycle.js:217:16)[m
+[32m+[m[32m9 verbose stack     at emitTwo (events.js:87:13)[m
+[32m+[m[32m9 verbose stack     at EventEmitter.emit (events.js:172:7)[m
+[32m+[m[32m9 verbose stack     at ChildProcess.<anonymous> (C:\Users\donita\AppData\Roaming\npm\node_modules\npm\lib\utils\spawn.js:24:14)[m
+[32m+[m[32m9 verbose stack     at emitTwo (events.js:87:13)[m
+[32m+[m[32m9 verbose stack     at ChildProcess.emit (events.js:172:7)[m
+[32m+[m[32m9 verbose stack     at maybeClose (internal/child_process.js:827:16)[m
+[32m+[m[32m9 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)[m
+[32m+[m[32m10 verbose pkgid PhotoGallery@0.0.1[m
+[32m+[m[32m11 verbose cwd C:\Users\donita\Desktop\Semester 3\280\PhotoGallery[m
+[32m+[m[32m12 error Windows_NT 10.0.14393[m
+[32m+[m[32m13 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\donita\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "start"[m
+[32m+[m[32m14 error node v4.4.5[m
+[32m+[m[32m15 error npm  v2.15.5[m
+[32m+[m[32m16 error code ELIFECYCLE[m
+[32m+[m[32m17 error PhotoGallery@0.0.1 start: `node app.js`[m
+[32m+[m[32m17 error Exit status 1[m
+[32m+[m[32m18 error Failed at the PhotoGallery@0.0.1 start script 'node app.js'.[m
+[32m+[m[32m18 error This is most likely a problem with the PhotoGallery package,[m
+[32m+[m[32m18 error not with npm itself.[m
+[32m+[m[32m18 error Tell the author that this fails on your system:[m
+[32m+[m[32m18 error     node app.js[m
+[32m+[m[32m18 error You can get information on how to open an issue for this project with:[m
+[32m+[m[32m18 error     npm bugs PhotoGallery[m
+[32m+[m[32m18 error Or if that isn't available, you can get their info via:[m
+[32m+[m[32m18 error[m
+[32m+[m[32m18 error     npm owner ls PhotoGallery[m
+[32m+[m[32m18 error There is likely additional logging output above.[m
+[32m+[m[32m19 verbose exit [ 1, true ][m
+[1mdiff --git a/public/app.js b/public/app.js[m
+[1mindex 25f8f67..8c42545 100644[m
+[1m--- a/public/app.js[m
+[1m+++ b/public/app.js[m
+[36m@@ -1,101 +1,124 @@[m
+ 'use strict';[m
+ [m
+[31m-var photoApp = angular.module('photoApp', ['ui.router','ngCookies']);[m
+[31m-[m
+[31m-photoApp.config(function($stateProvider, $urlRouterProvider){[m
+[31m-	[m
+[31m-	$urlRouterProvider.otherwise('/');[m
+[31m-[m
+[31m-	$stateProvider[m
+[31m-	.state('home',{[m
+[31m-		url: '/',[m
+[31m-		views: {[m
+[31m-			'header': {[m
+[31m-				templateUrl: '/shared/header/header.html'[m
+[31m-[m
+[31m-			},[m
+[31m-			'content': {[m
+[31m-				templateUrl: '/components/home/content.html',	[m
+[31m-				controller: 'videoController'[m
+[31m-[m
+[31m-			},[m
+[31m-			'footer': {[m
+[31m-				templateUrl: '/shared/footer/footer.html'[m
+[31m-			}[m
+[31m-		}[m
+[31m-	})[m
+[31m-[m
+[31m-	.state('images',{[m
+[31m-		url: '/images',[m
+[31m-		views: {[m
+[31m-[m
+[31m-			'header': {[m
+[31m-				templateUrl: '/shared/header/header.html'[m
+[31m-[m
+[31m-			},[m
+[31m-[m
+[31m-			'content': {[m
+[31m-				templateUrl: '/components/images/content.html',	[m
+[31m-				controller: 'imageGridController'[m
+[31m-[m
+[31m-			},[m
+[31m-			'footer': {[m
+[31m-				templateUrl: '/shared/footer/footer.html'[m
+[31m-			}[m
+[31m-		}[m
+[31m-[m
+[31m-[m
+[31m-})[m
+[31m-	.state('signin',{[m
+[31m-		url: '/signin',[m
+[31m-		views: {[m
+[31m-[m
+[31m-			'header': {[m
+[31m-				templateUrl: '/shared/header/header.html'[m
+[31m-[m
+[31m-			},[m
+[31m-[m
+[31m-			'content': {[m
+[31m-				templateUrl: '/components/signin/login.view.html',	[m
+[31m-				controller: 'Login.IndexController'[m
+[31m-[m
+[31m-			},[m
+[31m-			'footer': {[m
+[31m-				templateUrl: '/shared/footer/footer.html'[m
+[31m-			}[m
+[31m-		}[m
+[31m-[m
+[31m-[m
+[31m-})[m
+[31m-	.state('signup',{[m
+[31m-		url: '/signup',[m
+[31m-		views: {[m
+[31m-[m
+[31m-			'header': {[m
+[31m-				templateUrl: '/shared/header/header.html'[m
+[31m-[m
+[31m-			},[m
+[31m-[m
+[31m-			'content': {[m
+[31m-				templateUrl: '/components/signup/signup.html',	[m
+[31m-				controller: 'signupController'[m
+[31m-[m
+[31m-			},[m
+[31m-			'footer': {[m
+[31m-				templateUrl: '/shared/footer/footer.html'[m
+[31m-			}[m
+[31m-		}[m
+[31m-[m
+[31m-[m
+[32m+[m[32mvar photoApp = angular.module('photoApp', [ 'ui.router', 'ngCookies' ]);[m
+[32m+[m
+[32m+[m[32mphotoApp[m
+[32m+[m		[32m.config(function($stateProvider, $urlRouterProvider) {[m
+[32m+[m
+[32m+[m			[32m$urlRouterProvider.otherwise('/');[m
+[32m+[m
+[32m+[m			[32m$stateProvider[m
+[32m+[m					[32m.state('home', {[m
+[32m+[m						[32murl : '/',[m
+[32m+[m						[32mviews : {[m
+[32m+[m							[32m'header' : {[m
+[32m+[m								[32mtemplateUrl : '/shared/header/header.html'[m
+[32m+[m
+[32m+[m							[32m},[m
+[32m+[m							[32m'content' : {[m
+[32m+[m								[32mtemplateUrl : '/components/home/content.html',[m
+[32m+[m								[32mcontroller : 'videoController'[m
+[32m+[m
+[32m+[m							[32m},[m
+[32m+[m							[32m'footer' : {[m
+[32m+[m								[32mtemplateUrl : '/shared/footer/footer.html'[m
+[32m+[m							[32m}[m
+[32m+[m						[32m}[m
+[32m+[m					[32m})[m
+[32m+[m					[32m.state('signup', {[m
+[32m+[m						[32murl : '/signup',[m
+[32m+[m						[32mviews : {[m
+[32m+[m
+[32m+[m							[32m'header' : {[m
+[32m+[m								[32mtemplateUrl : '/shared/header/header.html'[m
+[32m+[m
+[32m+[m							[32m},[m
+[32m+[m
+[32m+[m							[32m'content' : {[m
+[32m+[m								[32mtemplateUrl : '/components/signup/signup.html',[m
+[32m+[m								[32mcontroller : 'signupController'[m
+[32m+[m
+[32m+[m							[32m},[m
+[32m+[m							[32m'footer' : {[m
+[32m+[m								[32mtemplateUrl : '/shared/footer/footer.html'[m
+[32m+[m							[32m}[m
+[32m+[m						[32m}[m
+[32m+[m
+[32m+[m					[32m})[m
+[32m+[m
+[32m+[m					[32m.state([m
+[32m+[m							[32m'images',[m
+[32m+[m							[32m{[m
+[32m+[m								[32murl : '/images',[m
+[32m+[m								[32mviews : {[m
+[32m+[m
+[32m+[m									[32m'header' : {[m
+[32m+[m										[32mtemplateUrl : '/shared/header/header.html'[m
+[32m+[m
+[32m+[m									[32m},[m
+[32m+[m
+[32m+[m									[32m'content' : {[m
+[32m+[m										[32mtemplateUrl : '/components/images/content.html',[m
+[32m+[m										[32mcontroller : 'imageGridController'[m
+[32m+[m
+[32m+[m									[32m},[m
+[32m+[m									[32m'footer' : {[m
+[32m+[m										[32mtemplateUrl : '/shared/footer/footer.html'[m
+[32m+[m									[32m}[m
+[32m+[m								[32m}[m
+[32m+[m
+[32m+[m							[32m})[m
+[32m+[m					[32m.state([m
+[32m+[m							[32m'signin',[m
+[32m+[m							[32m{[m
+[32m+[m								[32murl : '/signin',[m
+[32m+[m								[32mviews : {[m
+[32m+[m
+[32m+[m									[32m'header' : {[m
+[32m+[m										[32mtemplateUrl : '/shared/header/header.html'[m
+[32m+[m
+[32m+[m									[32m},[m
+[32m+[m
+[32m+[m									[32m'content' : {[m
+[32m+[m										[32mtemplateUrl : '/components/signin/login.view.html',[m
+[32m+[m										[32mcontroller : 'Login.IndexController'[m
+[32m+[m
+[32m+[m									[32m},[m
+[32m+[m									[32m'footer' : {[m
+[32m+[m										[32mtemplateUrl : '/shared/footer/footer.html'[m
+[32m+[m									[32m}[m
+[32m+[m								[32m}[m
+[32m+[m
+[32m+[m							[32m})[m
+[32m+[m					[32m.state([m
+[32m+[m							[32m'landingpage',[m
+[32m+[m							[32m{[m
+[32m+[m								[32murl : '/landingpage',[m
+[32m+[m								[32mviews : {[m
+[32m+[m
+[32m+[m									[32m'header' : {[m
+[32m+[m										[32mtemplateUrl : '/shared/header/header.html'[m
+[32m+[m
+[32m+[m									[32m},[m
+[32m+[m
+[32m+[m									[32m'content' : {[m
+[32m+[m										[32mtemplateUrl : '/components/landingpage/landingpage.content.html',[m
+[32m+[m										[32mcontroller : 'landingPageController'[m
+[32m+[m
+[32m+[m									[32m},[m
+[32m+[m									[32m'footer' : {[m
+[32m+[m										[32mtemplateUrl : '/shared/footer/footer.html'[m
+[32m+[m									[32m}[m
+[32m+[m								[32m}[m
+[32m+[m
+[32m+[m							[32m});[m
+[32m+[m
+[32m+[m		[32m});[m
+[32m+[m
+[32m+[m[32mphotoApp.controller('videoController', function($scope) {[m
+[32m+[m	[32m$scope.pageClass = 'page-video';[m
+ });[m
+ [m
+[31m-	});[m
+[31m-[m
+[31m-[m
+[31m-	photoApp.controller('videoController', function($scope){[m
+[31m-		$scope.pageClass = 'page-video';[m
+[31m-	});[m
+[31m-[m
+[31m-	photoApp.controller('imageGridController', function($scope){[m
+[31m-		$scope.pageClass = 'page-imageGrid';[m
+[31m-	});[m
+\ No newline at end of file[m
+[32m+[m[32mphotoApp.controller('imageGridController', function($scope) {[m
+[32m+[m	[32m$scope.pageClass = 'page-imageGrid';[m
+[32m+[m[32m});[m
+\ No newline at end of file[m
+[1mdiff --git a/public/components/landingpage/landingpage.content.html b/public/components/landingpage/landingpage.content.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5d26f43[m
+[1m--- /dev/null[m
+[1m+++ b/public/components/landingpage/landingpage.content.html[m
+[36m@@ -0,0 +1,40 @@[m
+[32m+[m
+[32m+[m[32m<div class="row">[m
+[32m+[m		[32m<div class="col-md-4">[m
+[32m+[m			[32m<table class="table table-inverse">[m
+[32m+[m				[32m<tbody>[m
+[32m+[m					[32m<tr ng-repeat="n in photos track by $index" ng-if="$index%3==0" >[m
+[32m+[m						[32m<td><img src="{{n.url}}"[m
+[32m+[m							[32mclass="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>[m
+[32m+[m
+[32m+[m					[32m</tr>[m
+[32m+[m
+[32m+[m				[32m</tbody>[m
+[32m+[m			[32m</table>[m
+[32m+[m		[32m</div>[m
+[32m+[m		[32m<div class="col-md-4">[m
+[32m+[m			[32m<table class="table table-inverse">[m
+[32m+[m				[32m<tbody>[m
+[32m+[m					[32m<tr ng-repeat="n in photos track by $index" ng-if="$index%3==1">[m
+[32m+[m						[32m<td><img src="{{n.url}}"[m
+[32m+[m							[32mclass="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>[m
+[32m+[m
+[32m+[m					[32m</tr>[m
+[32m+[m
+[32m+[m				[32m</tbody>[m
+[32m+[m			[32m</table>[m
+[32m+[m		[32m</div>[m
+[32m+[m		[32m<div class="col-md-4">[m
+[32m+[m			[32m<table class="table table-inverse">[m
+[32m+[m				[32m<tbody>[m
+[32m+[m					[32m<tr ng-repeat="n in photos track by $index" ng-if="$index%3==2">[m
+[32m+[m						[32m<td><img src="{{n.url}}"[m
+[32m+[m							[32mclass="img-fluid, img-thumbnail, myimage" alt="Responsive image"></td>[m
+[32m+[m
+[32m+[m					[32m</tr>[m
+[32m+[m
+[32m+[m				[32m</tbody>[m
+[32m+[m			[32m</table>[m
+[32m+[m		[32m</div>[m
+[32m+[m
+[32m+[m	[32m</div>[m
+\ No newline at end of file[m
+[1mdiff --git a/public/components/landingpage/landingpage.controller.js b/public/components/landingpage/landingpage.controller.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..a74f3e6[m
+[1m--- /dev/null[m
+[1m+++ b/public/components/landingpage/landingpage.controller.js[m
+[36m@@ -0,0 +1,25 @@[m
+[32m+[m[32m(function () {[m
+[32m+[m[32m    'use strict';[m
+[32m+[m[41m [m
+[32m+[m[32m    angular[m
+[32m+[m[32m        .module('photoApp')[m
+[32m+[m[32m        .controller('landingPageController', Controller);[m
+[32m+[m[41m [m
+[32m+[m[32m    function Controller($location, AuthenticationService) {[m
+[32m+[m[32m        var vm = this;[m
+[32m+[m[41m [m
+[32m+[m[32m        vm.getPhotos = getPhotos;[m
+[32m+[m[41m [m
+[32m+[m[32m        initController();[m
+[32m+[m[41m [m
+[32m+[m[32m        function initController() {[m
+[32m+[m[41m        [m	[32mconsole.log('Inside landing page');[m
+[32m+[m[32m            // reset login status[m
+[32m+[m[32m            // AuthenticationService.Logout();[m
+[32m+[m[32m        };[m
+[32m+[m[41m [m
+[32m+[m[32m        function getPhotos() {[m
+[32m+[m[41m        [m
+[32m+[m[32m        };[m
+[32m+[m[32m    }[m
+[32m+[m[32m})();[m
+\ No newline at end of file[m
+[1mdiff --git a/public/components/signin/login.controller.js b/public/components/signin/login.controller.js[m
+[1mindex 4e9241d..961d149 100644[m
+[1m--- a/public/components/signin/login.controller.js[m
+[1m+++ b/public/components/signin/login.controller.js[m
+[36m@@ -5,8 +5,8 @@[m
+         .module('photoApp')[m
+         .controller('Login.IndexController', Controller);[m
+  [m
+[31m-    function Controller($location, AuthenticationService) {[m
+[31m-        var vm = this;[m
+[32m+[m[32m    function Controller($scope, $location, AuthenticationService) {[m
+[32m+[m[32m        var vm = $scope;[m
+  [m
+         vm.login = login;[m
+  [m
+[36m@@ -19,11 +19,15 @@[m
+  [m
+         function login() {[m
+             vm.loading = true;[m
+[32m+[m[32m         //   console.log("Donita"+vm.username);[m
+             AuthenticationService.Login(vm.username, vm.password, function (result) {[m
+                 if (result === true) {[m
+[31m-                    $location.path('/');[m
+[32m+[m[41m                [m	[32m//console.log("Donita"+vm.username);[m
+[32m+[m[32m                  //  $location.path('/');[m
+[32m+[m[41m                [m	[32m$state.transitionTo('landingpage');[m
+                 } else {[m
+                     vm.error = 'Username or password is incorrect';[m
+[32m+[m[32m                    console.log(vm.error);[m
+                     vm.loading = false;[m
+                 }[m
+             });[m
+[1mdiff --git a/public/components/signin/login.view.html b/public/components/signin/login.view.html[m
+[1mindex 971b0bc..9ddc309 100644[m
+[1m--- a/public/components/signin/login.view.html[m
+[1m+++ b/public/components/signin/login.view.html[m
+[36m@@ -8,33 +8,36 @@[m
+    [m
+     <!-- FORM -->[m
+     <!-- pass in the variable if our form is valid or invalid -->[m
+[31m-    <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->[m
+[32m+[m[32m    <form name="userForm" ng-submit = "login()" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->[m
+ [m
+         <!-- NAME -->[m
+[31m-        <div class="form-group">[m
+[32m+[m[32m    <!--     <div class="form-group">[m
+             <label>Name</label>[m
+             <input type="text" name="name" class="form-control" ng-model="name" required>[m
+             <p ng-show="userForm.name.$invalid " class="help-block">You name is required.</p>[m
+[31m-        </div>[m
+[32m+[m[32m        </div>-->[m[41m [m
+ [m
+         <!-- USERNAME -->[m
+         <div class="form-group">[m
+             <label>Username</label>[m
+[31m-            <input type="text" name="username" class="form-control" ng-model="user.username" ng-minlength="3" ng-maxlength="8">[m
+[32m+[m[32m            <input type="text" name="username" class="form-control" ng-model="username" ng-minlength="3" ng-maxlength="8">[m
+             <p ng-show="userForm.username.$error.minlength" class="help-block">Username is too short.</p>[m
+             <p ng-show="userForm.username.$error.maxlength" class="help-block">Username is too long.</p>[m
+ [m
+         </div>[m
+[31m-        [m
+[32m+[m[32m         <div class="form-group">[m
+[32m+[m[32m       <label for="exampleInputPassword1">Password</label>[m
+[32m+[m[32m       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="password">[m
+[32m+[m[32m   </div>[m
+         <!-- EMAIL -->[m
+[31m-        <div class="form-group">[m
+[32m+[m[32m     <!--     <div class="form-group">[m
+             <label>Email</label>[m
+             <input type="email" name="email" class="form-control" ng-model="email">[m
+             <p ng-show="userForm.email.$invalid " class="help-block">Enter a valid email.</p>[m
+[31m-        </div>[m
+[32m+[m[32m        </div>-->[m
+         [m
+         <!-- SUBMIT BUTTON -->[m
+[31m-        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>[m
+[32m+[m[32m        <input type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" value="Submit">[m
+         [m
+     </form>[m
+ [m
+[1mdiff --git a/public/services/authenticationService.js b/public/services/authenticationService.js[m
+[1mindex 72e5944..fa4b9fb 100644[m
+[1m--- a/public/services/authenticationService.js[m
+[1m+++ b/public/services/authenticationService.js[m
+[36m@@ -9,13 +9,18 @@[m [mangular.module('photoApp').factory('AuthenticationService',[m
+         service.Login = function (username, password, callback) {[m
+ [m
+             /* Dummy authentication for testing, uses $timeout to simulate api call[m
+[32m+[m[32m             *[m[41m [m
+[32m+[m[32m             *[m[41m [m
+              ----------------------------------------------*/[m
+[32m+[m[41m        	[m
+[32m+[m[41m        [m	[32mconsole.log("Don" + username + password);[m
+             $timeout(function () {[m
+                 var response = { success: username === 'test' && password === 'test' };[m
+[32m+[m[32m                console.log(response.success);[m
+                 if (!response.success) {[m
+                     response.message = 'Username or password is incorrect';[m
+                 }[m
+[31m-                callback(response);[m
+[32m+[m[32m                callback(response.success);[m
+             }, 1000);[m
+ [m
+ [m
